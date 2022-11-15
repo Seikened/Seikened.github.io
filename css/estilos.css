@@ -1,0 +1,163 @@
+/* CCS GENERAL DE ELEMENTOS */
+
+
+*{
+    margin:0px;
+    padding:0px;
+}
+body{
+    background-color: #222;
+    color: white;
+    font: 200 14px 'Poppins', sans-serif;
+}
+
+h2{
+    font-size:36px;
+    line-height: 36px;
+}
+
+h3{
+    color:#999;
+    font-size:18px;
+    font-weight:300;
+}
+
+nav{
+    position: fixed;
+    width: 100%;
+    height: 55px;
+    background-color: #222;
+    border-bottom:  1px solid white;
+    padding-top: 10px;
+    text-align: center;
+}
+/* esta forma de nav ul es para hablarle de manera espeficica que afecte a tal etiqueta que tenga tal otra etiqueta */
+nav ul{
+    display: inline-block;
+}
+
+nav ul li{
+    padding-top: 12px;
+    
+}
+
+section{
+    padding: 10px 100px 10px 100px;
+}
+
+p{
+    text-align: justify;
+}
+
+cite{
+    font-weight:300;
+}
+
+i{
+    font-size: 24px ;
+}
+/* 
+Selecciona cualquier elemento que coincida con :link o :visited 
+El que sea -moz o webkit solo es para compatibilidad de navegadores
+*/
+a{ 
+    color: white;
+    text-decoration: none;
+    transition: all .25s ease-in-out;
+}
+
+
+
+
+a:any-link{
+    color: white;
+}
+a:-moz-any-link{
+    color: white;
+}
+
+a:-webkit-any-link{
+    color: white;
+}
+
+a:hover{
+    font-size: 1.2em;
+    transform: scale(1.5);
+    color: #ffc900;
+}
+
+ul{
+    list-style: none;
+}
+
+li{
+    float: left;
+    margin-right: 5px;
+}
+
+
+/* CSS IDs y Clase */
+
+.hastag{
+    color:#ffc900;
+}
+
+#img-perfil{
+    height: 250px;
+    border: 1px solid #222;
+    transition: all .5s ease-in-out;
+}
+
+#img-perfil:hover{
+    border: 1px solid #ffc900;
+}
+
+/* ----SOCIAL MEDIA--------------------------------------------------------------------------------------------------- */
+/* ul */
+#social-media{
+    margin-top: 20PX;
+    padding: 0;
+    font-size: 2em;
+}
+
+/* a */
+.social-media-icon{
+    font-size: 0em;
+    width: 30px;
+    margin-right: 5px;
+    float: left;
+}
+
+/*  a:hover */
+.social-media-icon:hover{
+    font-size: 0em;
+    margin: 5px;
+}
+/* ------------------------------------------------------------------------------------------------------------------- */
+
+#inicio{
+    padding-top: 75px;
+    background-image: url("../imagenes/inicio.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 280px;
+}
+
+#logo{
+    padding-top: 0px;
+}
+
+#experiencia{
+    background-color:white;
+    color: #222;
+}
+#cualidades {
+    border-top: 1px solid #ffc900;
+}
+
+
+
+
+
+
+

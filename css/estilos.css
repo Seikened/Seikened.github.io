@@ -145,11 +145,6 @@ button{
     background-size: cover;
     min-height: 280px;
 }
-
-#logo{
-    padding-top: 0px;
-}
-
 /* Diseño de las tarjetas del portfolio */
 .filaportfolio{
     display: flex;
@@ -207,6 +202,11 @@ button{
     margin-top: 5px;
     padding: 5px;
 }
+#logo{
+    padding-top: 0px;
+}
+
+
 
 #experiencia{
     background-color:white;

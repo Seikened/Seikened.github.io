@@ -1,14 +1,21 @@
 /* CCS GENERAL DE ELEMENTOS */
-
+:root{
+    --black:#161515;
+    --pur:#8B83AF;
+    --fontFamily: 200 14px "Space Grotesk", sans-serif;
+}
 
 *{
     margin:0px;
     padding:0px;
 }
 body{
-    background-color: #222;
+    background-color: var(--black);
     color: white;
-    font: 200 14px 'Poppins', sans-serif;
+    font:  var(--fontFamily);
+}
+#inicio h2{
+    color: var(--black);
 }
 
 h2{
@@ -26,8 +33,9 @@ nav{
     position: fixed;
     width: 100%;
     height: 55px;
-    background-color: #222;
-    border-bottom:  1px solid white;
+    background-color: hsla(0,2%,8%,.6);
+    backdrop-filter: saturate(180%) blur(20px);
+    /* border-bottom:  1px solid white; */
     padding-top: 10px;
     text-align: center;
 }
@@ -38,7 +46,16 @@ nav ul{
 
 nav ul li{
     padding-top: 12px;
-    
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+nav ul li a:hover{
+    color: white;
+    background-color: var(--pur);
+    border-radius: 3px;
+    padding: 5px;
 }
 
 section{
@@ -69,21 +86,14 @@ a{
 
 
 
-a:any-link{
-    color: white;
-}
-a:-moz-any-link{
-    color: white;
-}
 
 a:-webkit-any-link{
     color: white;
+    cursor: pointer;
 }
 
 a:hover{
-    font-size: 1.2em;
-    transform: scale(1.5);
-    color: #ffc900;
+    color: var(--pur);
 }
 
 ul{
@@ -97,22 +107,24 @@ li{
 
 button{
     border-radius: 10px;
+    border: none;
+    color: #16151500;
 }
 
 /* CSS IDs y Clase */
 
 .hastag{
-    color:#ffc900;
+    color:var(--pur);
 }
 
 #img-perfil{
     height: 250px;
-    border: 1px solid #222;
+    border: 1px solid var(--black);
     transition: all .5s ease-in-out;
 }
 
 #img-perfil:hover{
-    border: 1px solid #ffc900;
+    border: 1px solid var(--pur);
 }
 
 /* ----SOCIAL MEDIA--------------------------------------------------------------------------------------------------- */
@@ -125,22 +137,16 @@ button{
 
 /* a */
 .social-media-icon{
-    font-size: 0em;
     width: 30px;
     margin-right: 5px;
     float: left;
 }
 
-/*  a:hover */
-.social-media-icon:hover{
-    font-size: 0em;
-    margin: 5px;
-}
 /* ------------------------------------------------------------------------------------------------------------------- */
 
 #inicio{
     padding-top: 75px;
-    background-image: url("../imagenes/inicio.png");
+    background-image: url("../imagenes/background.svg");
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 280px;
@@ -158,7 +164,7 @@ button{
 
 .card{
     width: 250px;
-    background-color: #191919;
+    background-color: #2b2a2a;
     border-radius: 15px;
 }
 
@@ -168,7 +174,7 @@ button{
 }
 
 .card h3{
-    color: #ffc900;
+    color: var(--pur);
 }
 
 .card h4{
@@ -185,8 +191,8 @@ button{
 }
 
 .card .masinfo button{
-    color: #222;
-    background-color: #ffc900;
+    color: var(--black);
+    background-color: var(--pur);
     font-weight: 600;
     padding-left: 15px;
     padding-right: 15px;
@@ -195,23 +201,36 @@ button{
 
 .card .sep{
     margin:0 0px 5px 0;
-    border: 1px solid #ffc900;
+    border: 1px solid var(--pur);
 }
 
 .card button{
     margin-top: 5px;
     padding: 5px;
 }
+
 #logo{
     padding-top: 0px;
 }
+#logo a{
+    font-size: 30px;
+    border-radius: 5px;
+    border: 3px solid #8b83af00;
+    background-color: #8b83af00;
+    transition: all  .2s ease-in;
+}
 
+#logo a:hover{
+    transition: scale(1.2);
+    background-color: var(--pur);
+    border-radius: 60%;
 
+}
 
 #experiencia{
     background-color:white;
-    color: #222;
+    color: var(--black);
 }
 #cualidades {
-    border-top: 1px solid #ffc900;
+    border-top: 1px solid var(--pur);
 }

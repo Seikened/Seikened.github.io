@@ -4,6 +4,20 @@
     --pur:#8B83AF;
     --fontFamily: 200 14px "Space Grotesk", sans-serif;
     --BackgroundImg:url("../imagenes/background.svg");
+    --AnimateGblobal: all 0.3s ease;
+    --Rainbow:linear-gradient(
+        124deg,
+        #E6CCF1,
+        #EEE7E1,
+        #F0E6DA,
+        #EBDEE7,
+        #F0EADE,
+        #E8E4E3,
+        #E9D8EA,
+        #D5D1F2,
+        #CBD4F5,
+        #C1D5F6
+    );
 }
 
 *{
@@ -56,8 +70,7 @@ nav ul li{
 nav ul li a:hover{
     color: white;
     background-color: var(--pur);
-    border-radius: 3px;
-    padding: 5px;
+    padding: 23.5px 5px 23.5px 5px;
 }
 
 section{
@@ -82,7 +95,7 @@ El que sea -moz o webkit solo es para compatibilidad de navegadores
 a{ 
     color: white;
     text-decoration: none;
-    transition: all .25s ease-in-out;
+    transition: var(--AnimateGblobal);
 }
 
 
@@ -111,6 +124,7 @@ button{
     border-radius: 10px;
     border: none;
     color: #16151500;
+    transition: var(--AnimateGblobal);
 }
 
 /* CSS IDs y Clase */
@@ -135,18 +149,28 @@ button{
 }
 
 /* ------------------------------------------------------------------------------------------------------------------- */
+#background_g{
+    height:100%;
+    width:100%;
+    left:0;
+    top:0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background: var(--Rainbow);
+    background-size: 1500% 1500%;
+    animation:rainbow 18s ease infinite;
+}
 
 #inicio{
     padding-top: 75px;
-    background-image: var(--BackgroundImg);
-    background-repeat: no-repeat;
-    background-size: cover;
     min-height: 280px;
 }
-
 #aboutme{
+    background-color: var(--black);
     display: grid;
-    grid-template: 1fr 1fr / auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-columns:  auto 1fr;
     align-items: center;
     justify-items: left;
 }
@@ -157,23 +181,22 @@ button{
     background-color: var(--pur);
     width: fit-content;
     padding: 7px 10px 7px 25px;
-    border-radius: 0 5em 5em 0px;
-    transition: all .5s ease;
+    border-radius: 0em .5em .5em 0em;
+    transition: var(--AnimateGblobal);
 }
 #title_aboutme:hover{
-    background-image: var(--BackgroundImg);
     color: var(--pur);
     cursor: pointer;
-    padding-left: 3em;
+    padding-left: 7em;
+    border-radius: 0 5em 5em 0px;
+    background: whitesmoke;
 }
 
 #image_aboutme{
     grid-column: 1;
     grid-row: 1/3;
-    background-image: var(--BackgroundImg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 3em;
+    border-radius: 3em 0em 3em 0em;
+    background:whitesmoke;
 }
 
 #image_aboutme img{
@@ -184,6 +207,11 @@ button{
     grid-column:2;
     grid-row: 2;
     padding-left: 1em;
+    transition: var(--AnimateGblobal);
+}
+
+#text_aboutme p strong:hover{
+    color: var(--pur);
 }
 
 /* Diseño de las tarjetas del portfolio */
@@ -244,28 +272,43 @@ button{
     padding: 5px;
 }
 
+.card button:hover{
+    cursor: pointer;
+    color: var(--pur);
+    background-color: white;
+}
+
 #logo{
     padding-top: 0px;
 }
 #logo a{
     font-size: 30px;
-    border-radius: 5px;
-    border: 3px solid #8b83af00;
-    background-color: #8b83af00;
-    transition: all  .2s ease-in;
+    padding-top: 8px;
+    border-top: var(--pur) 5px solid;
 }
 
 #logo a:hover{
-    transition: scale(1.2);
+    cursor: pointer;
     background-color: var(--pur);
-    border-radius: 60%;
-
+    border: white solid 5px;
+    padding-bottom: 1.5em;
+    border-radius: 0 0 5em 5em;
 }
 
 #experiencia{
-    background-color:white;
     color: var(--black);
+    background:var(--Rainbow);
+    background-size: 1500% 1500%;
+    animation:rainbow 18s ease infinite;
 }
 #cualidades {
     border-top: 1px solid var(--pur);
+    background-color: var(--black);
+}
+
+
+@keyframes rainbow{
+    0%{background-position:20% 82%}
+    5%{background-position:100% 19%}
+    100%{background-position:50% 82%}
 }

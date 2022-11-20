@@ -236,7 +236,7 @@ button{
     border-radius: 15px;
 }
 
-.card img{
+.card img,.card video,.card iframe{
     width: 250px;
     border-radius: 15px 15px 0px 0px;
 }

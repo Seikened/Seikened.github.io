@@ -215,6 +215,11 @@ button{
 }
 
 /* Diseño de las tarjetas del portfolio */
+#cualidades {
+    border-top: 1px solid var(--pur);
+    background-color: var(--black);
+}
+
 .filaportfolio{
     display: flex;
     flex-direction: row;
@@ -301,11 +306,92 @@ button{
     background-size: 1500% 1500%;
     animation:rainbow 18s ease infinite;
 }
-#cualidades {
-    border-top: 1px solid var(--pur);
+
+/* Card Experiencia */
+.gridexp{
+    padding-top: 20px;
+    display:grid;
+    /* Aqui tenemos un tema con el grid-template-columns por que si yo pongo 350px en los ancho de la columna esto se define
+        y pierde sentido cuando el ancho de la pantalla no es la suma de las tarjetas "cardexp" entonces lo dejo como 1fr (de manera automatica)
+        y ya despues veo que podria pasar */
+    grid-template-columns: repeat(3, 1fr); 
+    grid-gap: 10px;
+    justify-content: space-between;
+    align-content: space-around;
+}
+.cardexp{
     background-color: var(--black);
+    border-radius: 15px;
+    color:white;
+    padding: 10px 15px;
 }
 
+.cardexp h2{
+    margin-bottom: 5px;
+}
+
+.cardexp h3{
+    margin-bottom: 20px;
+}
+
+.cardexp p{
+    margin-bottom: 20px;
+}
+
+.cardexp ul{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cardexp li{
+    height: 30px;
+}
+
+#contact{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: var(--black);
+    color: whitesmoke;
+}
+
+/* Formulario */
+.form{
+    margin-top: 20px;
+}
+.itemform{
+    display: grid;
+    grid-template-columns: 150px 350px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.itemform label{
+    font-weight: 700;
+    grid-column: 1;
+    justify-self: end;
+    margin-right: 10px;
+}
+
+.itemform input,.itemform textarea{
+    font-family: var(--fontFamily);
+    border-radius: 5px;
+    border: none;
+}
+
+input[type="submit"]{
+    background-color:var(--pur);
+    color: white;
+    border:var(--pur) solid 2px;
+    padding: 10px;
+    grid-column: 2/3;
+    justify-self: end;
+}
+input:hover[type="submit"]{
+    font-weight: 700;
+    background-color:white;
+    color: var(--pur);
+    cursor: pointer;
+}
 
 @keyframes rainbow{
     0%{background-position:20% 82%}

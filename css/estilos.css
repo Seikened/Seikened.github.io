@@ -318,7 +318,7 @@ button{
     /* Aqui tenemos un tema con el grid-template-columns por que si yo pongo 350px en los ancho de la columna esto se define
         y pierde sentido cuando el ancho de la pantalla no es la suma de las tarjetas "cardexp" entonces lo dejo como 1fr (de manera automatica)
         y ya despues veo que podria pasar */
-    grid-template-columns: repeat(3, 350px); 
+    grid-template-columns: repeat(3, 1fr); 
     grid-gap: 10px;
     justify-content: space-between;
     align-content: space-around;

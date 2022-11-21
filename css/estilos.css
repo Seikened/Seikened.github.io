@@ -414,10 +414,11 @@ input:hover[type="submit"]{
     nav ul li a{
         font-size:.7em;
     }
+
     #inicio{
         text-align: center;
     }
-    
+
     #inicio ul{
         display: flex;
         flex-direction: row;
@@ -427,27 +428,47 @@ input:hover[type="submit"]{
     #aboutme{
         grid-template-columns: 1fr;
         grid-template-rows: repeat(3,auto) ;
-        gap: 10px;
     }
     #image_aboutme{
         grid-column: 1;
         grid-row: 1;
         justify-self: center;
+        border-radius: 3em 3em 0em 0em;
+        
     }
     #title_aboutme{
         grid-column: 1;
         grid-row: 2;
         justify-self: center;
+        border-radius: 0em 0em 3em 3em;
+        padding:0;
+        width: 166.656px;
     }
+
+    #title_aboutme h2{
+        font-size: 2em;
+        text-align: center;
+    }
+
     #text_aboutme{
+        padding-top: 1em;
         grid-column: 1;
         grid-row: 3;
         justify-self: center;
     }
 
+    #text_aboutme p{
+        text-align: center;
+    }
+
     .filaportfolio{
         justify-content: center;
     }
+    
+    #cualidades h2, #cualidades h3{
+        text-align: center;
+    }
+
     .gridexp{
         grid-template-columns: repeat(1, 1fr);
     }

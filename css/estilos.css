@@ -411,6 +411,8 @@ input:hover[type="submit"]{
     100%{background-position:50% 82%}
 }
 
+
+
 /* Si el tamaño de la pantalla es 400 o menos se cambia a estas pripiedades */
 @media only screen and (max-width:1284px){
 

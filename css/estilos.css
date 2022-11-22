@@ -445,6 +445,12 @@ input:hover[type="submit"]{
         text-align: center;
     }
 
+    #title_aboutme:hover{
+        cursor: pointer;
+        padding-left: 100%;
+        padding-right: 100%;
+    }
+
     #text_aboutme{
         padding-top: 1em;
         grid-column: 1;

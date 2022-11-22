@@ -30,8 +30,9 @@ body{
     background-size: 1500% 1500%;
     animation:rainbow 18s ease infinite;
 }
-#inicio h2{
-    color: var(--black);
+
+article{
+    padding-top: 75px;
 }
 
 h2{
@@ -152,9 +153,13 @@ button{
 /* ------------------------------------------------------------------------------------------------------------------- */
 
 #inicio{
-    padding-top: 75px;
     min-height: 280px;
 }
+
+#inicio h2{
+    color: var(--black);
+}
+
 #aboutme{
     background-color: var(--black);
     display: grid;
@@ -208,12 +213,12 @@ button{
 }
 
 /* Diseño de las tarjetas del portfolio */
-#proyect {
+#proyects {
     border-top: 1px solid var(--pur);
     background-color: var(--black);
 }
 
-.filaportfolio{
+.proyect_container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -223,50 +228,61 @@ button{
     margin-top: 15px;
 }
 
-.card{
+#proyect_buttons{
+    display:grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: 1fr;
+    justify-content: center;
+}
+
+#proyect_buttons button{
+    margin: 10px;
+}
+
+.proyect{
     width: 250px;
     background-color: #2b2a2a;
     border-radius: 15px;
 }
 
-.card img,.card video,.card iframe{
+.proyect img,.proyect video,.proyect iframe{
     width: 250px;
     border-radius: 15px 15px 0px 0px;
 }
 
-.card h3{
+.proyect h3{
     color: var(--pur);
 }
 
-.card h4{
+.proyect h4{
     margin: 0 5px 5px 0;
 }
 
-.card h3,.card h4,.card p,.card .masinfo{
+.proyect h3,.proyect h4,.proyect p,.proyect .masinfo{
     padding: 0 15px;
     text-align: center;
 }
 
-.card .time{
+.proyect .time{
     padding-top: 5px;
     color: wheat;
     font-size: 12px;
     font-weight: 400;
 }	
 
-.card .masinfo{
+.proyect .masinfo{
     margin: 15px 0px 15px 0px;
     height: 26px;
 }
 
-.card .sep{
+.proyect .sep{
     margin:0 0px 5px 0;
     border: 1px solid var(--pur);
     /* Pongo el background por que se miraba a ciertas resoluciones un espacio del div */
     background-color: var(--pur);
 }
 
-.card button{
+.proyect button, #proyect_buttons button{
     margin-top: 5px;
     padding: 5px;
     color: var(--black);
@@ -277,10 +293,12 @@ button{
     float: center;
 }
 
-.card button:hover{
+.proyect button:hover, #proyect_buttons button:hover{
     cursor: pointer;
     color: var(--pur);
     background-color: white;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 #logo{
@@ -304,7 +322,7 @@ button{
     color: var(--black);
 }
 
-/* Card Exp */
+/* Proyect Exp */
 .gridexp{
     padding-top: 20px;
     display:grid;
@@ -462,11 +480,21 @@ input:hover[type="submit"]{
         text-align: center;
     }
 
-    .filaportfolio{
+    #proyect_buttons{
+        display:grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    
+    #proyect_buttons button{
+        justify-self: center;
+    }
+
+    .proyect_container{
         justify-content: center;
     }
     
-    #proyect h2, #proyect h3{
+    #proyects h2, #proyects h3{
         text-align: center;
     }
 

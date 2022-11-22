@@ -19,7 +19,7 @@
         <nav>
             <ul>
                 <li><a href="#aboutme">Sobre mi</a></li>
-                <li><a href="#proyect">Proyectos</a></li>
+                <li><a href="#proyects">Proyectos</a></li>
                 <li id="logo"><a href="./index.html">👾</a></li>
                 <li><a href="#exp">Skils</a></li>
                 <li><a href="#contactar">Contactar</a></li>
@@ -68,11 +68,15 @@
                 </div>
             </section>
             <!-- Bloque portfolio -->
-            <section id="proyect">
+            <section id="proyects">
                 <h2>Proyectos</h2>
                 <h3>Just a game👾</h3>
-                <div class="filaportfolio">
-                    <div class="card">
+                <div id="proyect_buttons">
+                    <button onclick="addProyect()">➕ Proyecto</button>
+                    <button onclick="removeProyect()">➖Proyecto</button>
+                </div>
+                <div id="proyect_container" class="proyect_container">
+                    <div class="proyect">
                         <img src="./img/giphy (1).gif" alt="">
                         <h3>Protecto <strong>N</strong></h3>
                         <h4>Aprende Javascript ES9, HTML, CSS3 y NodeJS desde cero</h4>
@@ -81,7 +85,7 @@
                         <p class="time">Última actualización 21/11/2022</p>
                         <div class="masinfo"><button type="button" onclick="window.location.href='./proyects/proyect_n.html';">👉🏻</button></div>
                     </div>
-                    <div class="card">
+                    <div class="proyect">
                         
                         <iframe width="250" src="https://www.youtube.com/embed/p8P6HR7tucE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         <h3>musica</h3>
@@ -90,7 +94,7 @@
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                         <div class="masinfo"><button type="button">MAS INFO</button></div>
                     </div>
-                    <div class="card">
+                    <div class="proyect">
                         <img src="./img/711093.jpg" alt="Portfolio 3">
                         <h3>musica</h3>
                         <h4>concierto benicassim</h4>
@@ -98,7 +102,7 @@
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                         <div class="masinfo"><button type="button">MAS INFO</button></div>
                     </div>
-                    <div class="card">
+                    <div class="proyect">
                         <img src="./img/812556.jpg" alt="Portfolio 4">
                         <h3>musica</h3>
                         <h4>concierto benicassim</h4>
@@ -207,6 +211,7 @@
         <!-- Footer -->
         <footer>
             <p>© 2021 Fernando Leon Franco</p>
-        </footer>       
+        </footer>  
+        <script src="./js/main.js"></script>     
     </body>
 </html>

@@ -255,30 +255,37 @@ button{
 
 .card h3,.card h4,.card p,.card .masinfo{
     padding: 0 15px;
+    text-align: center;
 }
+
+.card .time{
+    padding-top: 5px;
+    color: wheat;
+    font-size: 12px;
+    font-weight: 400;
+}	
 
 .card .masinfo{
     margin: 15px 0px 15px 0px;
     height: 26px;
 }
 
-.card .masinfo button{
-    color: var(--black);
-    background-color: var(--pur);
-    font-weight: 600;
-    padding-left: 15px;
-    padding-right: 15px;
-    float: right;
-}
-
 .card .sep{
     margin:0 0px 5px 0;
     border: 1px solid var(--pur);
+    /* Pongo el background por que se miraba a ciertas resoluciones un espacio del div */
+    background-color: var(--pur);
 }
 
 .card button{
     margin-top: 5px;
     padding: 5px;
+    color: var(--black);
+    background-color: var(--pur);
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: center;
 }
 
 .card button:hover{
@@ -405,80 +412,6 @@ input:hover[type="submit"]{
 }
 
 /* Si el tamaño de la pantalla es 400 o menos se cambia a estas pripiedades */
-@media only screen and (max-width:400px){
-
-    section{
-        padding: 10px 20px 10px 20px;
-    }
-
-    nav ul li a{
-        font-size:.7em;
-    }
-
-    #inicio{
-        text-align: center;
-    }
-
-    #inicio ul{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    #aboutme{
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(3,auto) ;
-    }
-    #image_aboutme{
-        grid-column: 1;
-        grid-row: 1;
-        justify-self: center;
-        border-radius: 3em 3em 0em 0em;
-        
-    }
-    #title_aboutme{
-        grid-column: 1;
-        grid-row: 2;
-        justify-self: center;
-        border-radius: 0em 0em 3em 3em;
-        padding:0;
-        width: 166.656px;
-    }
-
-    #title_aboutme h2{
-        font-size: 2em;
-        text-align: center;
-    }
-
-    #text_aboutme{
-        padding-top: 1em;
-        grid-column: 1;
-        grid-row: 3;
-        justify-self: center;
-    }
-
-    #text_aboutme p{
-        text-align: center;
-    }
-
-    .filaportfolio{
-        justify-content: center;
-    }
-    
-    #cualidades h2, #cualidades h3{
-        text-align: center;
-    }
-
-    .gridexp{
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    .itemform{
-        grid-template-columns: 1fr 2fr;
-    }
-
-}
-
 @media only screen and (max-width:1284px){
 
     section{

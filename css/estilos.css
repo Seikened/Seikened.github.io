@@ -4,7 +4,7 @@
     --pur:#8B83AF;
     --fontFamily: 200 14px "Space Grotesk", sans-serif;
     --AnimateGblobal: all 0.3s ease;
-    --Rainbow:linear-gradient(
+    /* --Rainbow:linear-gradient(
         124deg,
         #E6CCF1,
         #EEE7E1,
@@ -16,7 +16,7 @@
         #D5D1F2,
         #CBD4F5,
         #C1D5F6
-    );
+    ); */
 }
 
 *{
@@ -26,9 +26,9 @@
 body{
     color: white;
     font:  var(--fontFamily);
-    background: var(--Rainbow);
-    background-size: 1500% 1500%;
-    animation:rainbow 18s ease infinite;
+    background: #E9D8EA;
+    /* background-size: 1500% 1500%;
+    animation:rainbow 18s ease infinite; */
 }
 
 article{

@@ -1,3 +1,69 @@
-body h2{
-    color: black;
+body{
+    background-color: #f5f5f5;
+    font-family: 'Popins', sans-serif;
+}
+header,footer{
+    text-align: center;
+    width: 300px;
+    margin: 30px auto 0px auto;
+}
+main{
+    width: 300px;
+    margin: 30px auto 0px auto;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    font-size: 18px;
+}
+label{
+    display: block;
+    margin-bottom: 10px;
+}
+input{
+    display: inline;
+    font-family: 'Popins', sans-serif;
+    width:236px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-radius: 0px 5px 5px 0px;
+    font-weight: 200;
+    font-size: 18px;
+}
+input[type="submit"]{
+    background-color: #fd0c49;
+    color:#fff;
+    font-weight:400;
+    border-radius: 5px;
+    width: 100%;
+}
+select{
+    font-family: 'Popins', sans-serif;
+    width: 100%;
+    border:1PX solid #CED4DA;
+    border-radius: 5px;
+    font-weight:200;
+    font-size: 18px;
+}
+footer{
+    font-weight: 100;
+}
+/* IDs */
+#nicka{
+    float: left;
+    font-family: 'Popins', sans-serif;
+    text-align: center;
+    width: 20px;
+    background-color: #ced4da;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-radius: 5px 0px 0px 5px;
+    font-weight: 400;
+    font-size: 18px;
+}
+#email{
+    border-radius: 5px;
+    
+    width: 278px;
 }

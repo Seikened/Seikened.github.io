@@ -1,23 +1,14 @@
+/* HTML5 display-role reset for older browsers */
+
 /* CCS GENERAL DE ELEMENTOS */
 :root{
     --black:#161515;
     --pur:#8B83AF;
     --fontFamily: 200 14px "Space Grotesk", sans-serif;
     --AnimateGblobal: all 0.3s ease;
-    /* --Rainbow:linear-gradient(
-        124deg,
-        #E6CCF1,
-        #EEE7E1,
-        #F0E6DA,
-        #EBDEE7,
-        #F0EADE,
-        #E8E4E3,
-        #E9D8EA,
-        #D5D1F2,
-        #CBD4F5,
-        #C1D5F6
-    ); */
 }
+
+
 
 *{
     margin:0px;
@@ -27,8 +18,6 @@ body{
     color: white;
     font:  var(--fontFamily);
     background: #E9D8EA;
-    /* background-size: 1500% 1500%;
-    animation:rainbow 18s ease infinite; */
 }
 
 article{
@@ -408,14 +397,6 @@ input:hover[type="submit"]{
     color: var(--pur);
     cursor: pointer;
 }
-
-@keyframes rainbow{
-    0%{background-position:20% 82%}
-    5%{background-position:100% 19%}
-    100%{background-position:50% 82%}
-}
-
-
 
 /* Si el tamaño de la pantalla es 400 o menos se cambia a estas pripiedades */
 @media only screen and (max-width:1284px){

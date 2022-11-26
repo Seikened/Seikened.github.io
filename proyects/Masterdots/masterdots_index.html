@@ -6,24 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masterdots</title>
     <!-- Links -->
-    <link rel="stylesheet" href="../../css/estilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">        
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="./css/styles.css">
-
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="../../index.html#aboutme">Sobre mi</a></li>
-            <li><a href="../../index.html#cualidades">Proyectos</a></li>
-            <li id="logo"><a href="../../index.html">👾</a></li>
-            <li><a href="../../index.html#experiencia">Skils</a></li>
-            <li><a href="../../index.html#contactar">Contactar</a></li>
-        </ul>
-    </nav>
-    <article>
-        <div>
-            <h2>Masterdots</h2>
-        </div>
-    </article>
+    <!-- HEADER -->
+    <header>
+        <a href="../../index.html"><img src="./img/logo.png" alt="Logo"></a>
+    </header>
+    <!-- FORMULARIO DEL USUARIO -->
+    <main>
+        <form action="#">
+            <div class="itemform">
+                <label for="nick">Introduce tu nick</label>
+                <input type="text" name="nick" value="@" id="nicka" readonly>
+                <input type="text" name="nick" id="nick">
+            </div>
+            <div class="itemform">
+                <label for="email">Correo electronico</label>
+                <input type="email" name="email" id="email" value="yo@email.com">
+            </div>
+            <div class="itemform">
+                <label for="size">Tamano del juego</label>
+                <select name="size" id="size">
+                    <option value="">--Elije un tamaño--</option>
+                    <option value="1">4x4</option>
+                    <option value="2">5x5</option>
+                    <option value="3">6x6</option>
+                </select>
+            </div>
+            <div class="itemform">
+                <input type="submit" value="Jugar">
+            </div>
+        </form>
+    </main>
+    <!-- PIE DE PAGINA -->
+    <footer>
+        <p>Curso FronEnd HTML, CSS Y JS</p>
+    </footer>
+    <!-- SCRIPTS -->
+    <script src="./js/app.js"></script>
 </body>
 </html>

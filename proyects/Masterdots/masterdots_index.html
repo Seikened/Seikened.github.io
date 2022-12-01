@@ -19,18 +19,21 @@
     </header>
     <!-- FORMULARIO DEL USUARIO -->
     <main>
+        <div>
+            <p id="error"></p>
+        </div>
         <form action="juego.html" id="formEntrada">
             <div class="itemform">
-                <label for="nick">Introduce tu nick</label>
+                <label for="nick">Introduce tu nick*</label>
                 <input type="text" name="nick" value="@" id="nicka" readonly>
-                <input type="text" name="nick" id="nick">
+                <input type="text" name="nick" id="nick" required minlength="2">
             </div>
             <div class="itemform">
                 <label for="email">Correo electronico</label>
-                <input type="email" name="email" id="email" value="yo@email.com">
+                <input type="email" name="email" id="email" value="yo@email.com" required>
             </div>
             <div class="itemform">
-                <label for="size">Tamano del juego</label>
+                <label for="size">Tamano del juego*</label>
                 <select name="size" id="size">
                     <option value="0">--Elije un tamaño--</option>
                     <option value="1">4x4</option>
@@ -40,6 +43,9 @@
             </div>
             <div class="itemform">
                 <input type="submit" value="Jugar" id="jugar">
+            </div>
+            <div>
+                <p>*Campos obligatorios</p>
             </div>
         </form>
     </main>

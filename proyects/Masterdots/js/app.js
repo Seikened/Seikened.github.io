@@ -4,24 +4,28 @@
 // Inicializadores de var, objetos, DOM
 const formEntrada = document.getElementById("formEntrada");
 const nickInput = document.getElementById("nick");
-const emailInput = document.getElementById("emal");
+const emailInput = document.getElementById("email");
 const sizeInput = document.getElementById("size");
+const errorDisplay = document.getElementById("error")
 
 
 // Funciones de eventos
 function comprobarFurmulario(event){
     // Comprobar cambios
-    if(nickInput.value.length==0){
+    if(nickInput.value.match(/(?<!\S)[0-9]/)){
         console.log("Introduce un nick");
         nickInput.focus();
         event.preventDefault();
+        errorDisplay.innerText = "El nick no puede comenzar con un número";
         return false; // para que no se envie el formulario
     }else if(sizeInput.value=="0"){
         console.log("Introduce un tamaño");
         sizeInput.focus();
         event.preventDefault();
+        errorDisplay.innerHTML = "Selecciona un tamaño";
         return false; // para que no se envie el formulario
     }
+    errorDisplay.innerText = "";
     return true; // para que se envie el formulario
 } // fin de comprobarFurmulario
 

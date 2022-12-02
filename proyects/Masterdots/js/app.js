@@ -8,6 +8,11 @@ const emailInput = document.getElementById("email");
 const sizeInput = document.getElementById("size");
 const errorDisplay = document.getElementById("error")
 
+// Comprobar si hay algun error en el juego.html
+if(sessionStorage.getItem('error')){
+    errorDisplay.innerText = sessionStorage.getItem('error');
+    sessionStorage.removeItem('error');
+}
 
 // Funciones de eventos
 function comprobarFurmulario(event){
@@ -22,10 +27,13 @@ function comprobarFurmulario(event){
         console.log("Introduce un tamaño");
         sizeInput.focus();
         event.preventDefault();
-        errorDisplay.innerHTML = "Selecciona un tamaño";
+        errorDisplay.innerText = "Selecciona un tamaño";
         return false; // para que no se envie el formulario
     }
     errorDisplay.innerText = "";
+    //Información de usuario es correcta podre utilizar la función de almacenamiento de datos
+    userData(nickInput);
+    historicalUsers(nickInput);
     return true; // para que se envie el formulario
 } // fin de comprobarFurmulario
 

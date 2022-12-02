@@ -5,7 +5,8 @@
     --black:#161515;
     --pur:#8B83AF;
     --fontFamily: 200 14px "Space Grotesk", sans-serif;
-    --AnimateGblobal: all 0.3s ease;
+    --animateGblobal: all 0.3s ease;
+    --backGroundPrimary:#E9D8EA;
 }
 
 
@@ -17,7 +18,7 @@
 body{
     color: white;
     font:  var(--fontFamily);
-    background: #E9D8EA;
+    background: var(--backGroundPrimary);
 }
 
 article{
@@ -86,7 +87,7 @@ El que sea -moz o webkit solo es para compatibilidad de navegadores
 a{ 
     color: white;
     text-decoration: none;
-    transition: var(--AnimateGblobal);
+    transition: var(--animateGblobal);
 }
 
 
@@ -115,7 +116,7 @@ button{
     border-radius: 10px;
     border: none;
     color: #16151500;
-    transition: var(--AnimateGblobal);
+    transition: var(--animateGblobal);
 }
 footer ul{
     width: 300px;
@@ -179,7 +180,7 @@ footer ul{
     width: fit-content;
     padding: 7px 10px 7px 25px;
     border-radius: 0em .5em .5em 0em;
-    transition: var(--AnimateGblobal);
+    transition: var(--animateGblobal);
 }
 #title_aboutme:hover{
     color: var(--pur);
@@ -208,7 +209,7 @@ footer ul{
     grid-column:2;
     grid-row: 2;
     padding-left: 1em;
-    transition: var(--AnimateGblobal);
+    transition: var(--animateGblobal);
 }
 
 #text_aboutme p strong:hover{
@@ -225,7 +226,7 @@ footer ul{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     gap: 30px 30px;
     margin-bottom: 15px;
     margin-top: 15px;
@@ -343,6 +344,8 @@ footer ul{
     border-radius: 15px;
     color:white;
     padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .cardexp h2{
@@ -359,11 +362,11 @@ footer ul{
 
 .cardexp ul{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
-.cardexp li{
-    height: 30px;
+.cardexp li img{
+    height: 60px;
 }
 
 #contact{
@@ -412,6 +415,27 @@ input:hover[type="submit"]{
     cursor: pointer;
 }
 
+#logChanges{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 30px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.changes{
+    text-align: left;
+    margin-top: 10px;
+}
+
+.changesSoon{
+    text-align: center;
+    margin-top: 10px;
+    color: gray;
+    font-weight: 400;
+}
 /* Si el tamaño de la pantalla es 400 o menos se cambia a estas pripiedades */
 @media only screen and (max-width:1284px){
 

@@ -36,16 +36,47 @@
                 <label for="size">Tamaño del juego*</label>
                 <select name="size" id="size">
                     <option value="0">--Elije un tamaño--</option>
-                    <option value="1">4x4</option>
-                    <option value="2">5x5</option>
-                    <option value="3">6x6</option>
+                    <option value="4">4x4</option>
+                    <option value="5">5x5</option>
+                    <option value="6">6x6</option>
                 </select>
             </div>
             <div class="itemform">
                 <input type="submit" value="Jugar" id="jugar">
             </div>
+            <!-- Form of avatar selector -->
+            <div class="itemform">
+                <!-- Current avatar selected -->
+                <div id="avatar">
+                    <label for="avatar">Avatar</label>
+                    <div id="avatarContainer">
+                        <img src="./img/avatar1.png" id="avatarImg" alt="" >
+                    </div>
+                </div>
+                <!-- Selector de avatar -->
+                <div id="avatarGrid">
+                    <div class="avatarItem">
+                        <img src="./img/avatar1.png" class="avatarImgItem" alt="AvatarImg" draggable="true" width="35">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./img/avatar2.png" class="avatarImgItem" alt="AvatarImg" draggable="true" width="35">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./img/avatar3.png" class="avatarImgItem" alt="AvatarImg" draggable="true" width="35">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./img/avatar4.png" class="avatarImgItem" alt="AvatarImg" draggable="true" width="35">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./img/avatar5.png" class="avatarImgItem" alt="AvatarImg" draggable="true" width="35">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="./img/avatar6.png" class="avatarImgItem" alt="AvatarImg" draggable="true" width="35">
+                    </div>
+                </div>
+            </div>
             <div>
-                <p>*Campos obligatorios</p>
+                <p id="needed">*Obligatorio</p>
             </div>
         </form>
     </main>

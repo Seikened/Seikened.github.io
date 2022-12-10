@@ -77,6 +77,11 @@ function cuentaAtras(){
             item.removeEventListener('mouseover',continuarMarcar);
         }
         document.removeEventListener('mouseup',terminarMarcar);
+        // Cambiar los z-index de los paneles
+        document.getElementById('juegoAcabado').classList.add('juegoAcabadoColor');
+        document.getElementById('juegoAcabado').style.zIndex=2;
+        document.getElementById('juego').style.zIndex=1;
+        document.getElementById('juegoAcabado').addEventListener('click',(e)=>{location.reload()});
     }
 }
 
@@ -91,7 +96,7 @@ function programarEventosJuego(){
     }
     document.addEventListener('mouseup',terminarMarcar);
     // Cuenta atras
-    // idInterval = setInterval(cuentaAtras,1000);
+    idInterval = setInterval(cuentaAtras,1000);
 }
 
 /* FUNCIONES DEL JUEGO*/

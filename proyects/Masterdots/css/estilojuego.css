@@ -84,15 +84,19 @@ img{
 }
 .rojo{
     background-color: #fd0c49;
+    transition: background-color 0.4s;
 }
 .verde{
     background-color: #7ac943;
+    transition: background-color 0.4s;
 }
 #contenedorJuego{
     width: 500px;
     margin-right: 10px;
 }
 #juego{
+    position: absolute;
+    z-index: 2;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -104,7 +108,34 @@ img{
     border: 1px solid #ced4da;
     border-radius: 5px 5px 0px 0px;
 }
+.juegoAcabadoColor{
+    background-color: #263238;
+    transition: background-color 0.4s;
+}
+#juegoAcabado{
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: 5px 5px 0px 0px;
+    width: 500px;
+    height: 400px;
+}
+#juegoAcabado button{
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Popins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 5px;
+    width: 200px;
+}
 #tituloJuego{
+    margin-top: 400px;
     width: 500px;
     background-color: #263238;
     border: 1px solid #ced4da;

@@ -9,8 +9,6 @@
     --backGroundPrimary:#E9D8EA;
 }
 
-
-
 *{
     margin:0px;
     padding:0px;
@@ -20,22 +18,18 @@ body{
     font:  var(--fontFamily);
     background: var(--backGroundPrimary);
 }
-
 article{
     padding-top: 75px;
 }
-
 h2{
     font-size:36px;
     line-height: 36px;
 }
-
 h3{
     color:#999;
     font-size:18px;
     font-weight:300;
 }
-
 nav{
     position: fixed;
     width: 100%;
@@ -51,32 +45,26 @@ nav{
 nav ul{
     display: inline-block;
 }
-
 nav ul li{
     padding-top: 12px;
     margin-right: 20px;
     font-weight: bold;
     font-size: 15px;
 }
-
 nav ul li a:hover{
     color: white;
     background-color: var(--pur);
     padding: 23.5px 5px 23.5px 5px;
 }
-
 section{
     padding: 10px 100px 10px 100px;
 }
-
 p{
     text-align: justify;
 }
-
 cite{
     font-weight:300;
 }
-
 i{
     font-size: 24px ;
 }
@@ -89,29 +77,20 @@ a{
     text-decoration: none;
     transition: var(--animateGblobal);
 }
-
-
-
-
-
 a:-webkit-any-link{
     color: white;
     cursor: pointer;
 }
-
 a:hover{
     color: var(--pur);
 }
-
 ul{
     list-style: none;
 }
-
 li{
     float: left;
     margin-right: 5px;
 }
-
 button{
     border-radius: 10px;
     border: none;
@@ -132,13 +111,10 @@ footer ul{
     font-weight: 700;
     text-align: center;
 }
-
 /* CSS IDs y Clase */
-
 .hastag{
     color:var(--pur);
 }
-
 /* ----SOCIAL MEDIA--------------------------------------------------------------------------------------------------- */
 /* ul */
 #social-media{
@@ -146,24 +122,19 @@ footer ul{
     padding: 0;
     font-size: 2em;
 }
-
 /* a */
 .social-media-icon{
     width: 30px;
     margin-right: 5px;
     float: left;
 }
-
 /* ------------------------------------------------------------------------------------------------------------------- */
-
 #inicio{
     min-height: 280px;
 }
-
 #inicio h2{
     color: var(--black);
 }
-
 #aboutme{
     background-color: var(--black);
     display: grid;
@@ -172,7 +143,6 @@ footer ul{
     align-items: center;
     justify-items: left;
 }
-
 #title_aboutme{
     grid-column: 2;
     grid-row: 1;
@@ -189,39 +159,32 @@ footer ul{
     border-radius: 0 5em 5em 0px;
     background: whitesmoke;
 }
-
 #title_aboutme:hover a, #title_aboutme:hover ~ #text_aboutme p strong{
     color: var(--pur);
 } 
-
 #image_aboutme{
     grid-column: 1;
     grid-row: 1/3;
     border-radius: 3em 0em 3em 0em;
     background:whitesmoke;
 }
-
 #image_aboutme img{
     height: 250px;
 }
-
 #text_aboutme{
     grid-column:2;
     grid-row: 2;
     padding-left: 1em;
     transition: var(--animateGblobal);
 }
-
 #text_aboutme p strong:hover{
     color: var(--pur);
 }
-
 /* Diseño de las tarjetas del portfolio */
 #proyects {
     border-top: 1px solid var(--pur);
     background-color: var(--black);
 }
-
 .proyect_container{
     display: flex;
     flex-direction: row;
@@ -231,61 +194,50 @@ footer ul{
     margin-bottom: 15px;
     margin-top: 15px;
 }
-
 #proyect_buttons{
     display:grid;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: 1fr;
     justify-content: center;
 }
-
 #proyect_buttons button{
     margin: 10px;
 }
-
 .proyect{
     width: 250px;
     background-color: #2b2a2a;
     border-radius: 15px;
 }
-
 .proyect img,.proyect video,.proyect iframe{
     width: 250px;
     border-radius: 15px 15px 0px 0px;
 }
-
 .proyect h3{
     color: var(--pur);
 }
-
 .proyect h4{
     margin: 0 5px 5px 0;
 }
-
 .proyect h3,.proyect h4,.proyect p,.proyect .masinfo{
     padding: 0 15px;
     text-align: center;
 }
-
 .proyect .time{
     padding-top: 5px;
     color: wheat;
     font-size: 12px;
     font-weight: 400;
 }	
-
 .proyect .masinfo{
     margin: 15px 0px 15px 0px;
     height: 26px;
 }
-
 .proyect .sep{
     margin:0 0px 5px 0;
     border: 1px solid var(--pur);
     /* Pongo el background por que se miraba a ciertas resoluciones un espacio del div */
     background-color: var(--pur);
 }
-
 .proyect button, #proyect_buttons button{
     margin-top: 5px;
     padding: 5px;
@@ -296,7 +248,6 @@ footer ul{
     padding-right: 15px;
     float: center;
 }
-
 .proyect button:hover, #proyect_buttons button:hover{
     cursor: pointer;
     color: var(--pur);
@@ -304,7 +255,6 @@ footer ul{
     padding-left: 50px;
     padding-right: 50px;
 }
-
 #logo{
     padding-top: 0px;
 }
@@ -313,7 +263,6 @@ footer ul{
     padding-top: 8px;
     border-top: var(--pur) 5px solid;
 }
-
 #logo a:hover{
     cursor: pointer;
     background-color: var(--pur);
@@ -321,11 +270,9 @@ footer ul{
     padding-bottom: 1.5em;
     border-radius: 0 0 5em 5em;
 }
-
 #exp{
     color: var(--black);
 }
-
 /* Proyect Exp */
 .gridexp{
     padding-top: 20px;
@@ -338,7 +285,6 @@ footer ul{
     justify-content: space-between;
     align-content: space-around;
 }
-
 .cardexp{
     background-color: var(--black);
     border-radius: 15px;
@@ -347,35 +293,28 @@ footer ul{
     display: flex;
     flex-direction: column;
 }
-
 .cardexp h2{
     margin-bottom: 5px;
 }
-
 .cardexp h3{
     margin-bottom: 20px;
 }
-
 .cardexp p{
     margin-bottom: 20px;
 }
-
 .cardexp ul{
     display: flex;
     justify-content: center;
 }
-
 .cardexp li img{
     height: 60px;
 }
-
 #contact{
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: var(--black);
     color: whitesmoke;
 }
-
 /* Formulario */
 .form{
     margin-top: 20px;
@@ -386,20 +325,17 @@ footer ul{
     justify-content: center;
     margin-bottom: 10px;
 }
-
 .itemform label{
     font-weight: 700;
     grid-column: 1;
     justify-self: end;
     margin-right: 10px;
 }
-
 .itemform input,.itemform textarea{
     font-family: var(--fontFamily);
     border-radius: 5px;
     border: none;
 }
-
 input[type="submit"]{
     background-color:var(--pur);
     color: white;
@@ -414,7 +350,19 @@ input:hover[type="submit"]{
     color: var(--pur);
     cursor: pointer;
 }
-
+#currentCardChanges ul{
+    background-color: #fff;
+    color: var(--black);
+}
+#currentCardChanges ul li a{
+    border-bottom: 2px solid #fff;
+    color: var(--black);
+}
+#currentCardChanges ul li a:hover{
+    border-bottom: 2px solid var(--pur);
+    font-weight: 600;
+    color: var(--pur);
+}
 #logChanges{
     display: flex;
     flex-direction: row;
@@ -424,12 +372,10 @@ input:hover[type="submit"]{
     margin-bottom: 15px;
     margin-top: 15px;
 }
-
 .changes{
     text-align: left;
     margin-top: 10px;
 }
-
 .changesSoon{
     text-align: center;
     margin-top: 10px;
@@ -442,21 +388,17 @@ input:hover[type="submit"]{
     section{
         padding: 10px 20px 10px 20px;
     }
-
     nav ul li a{
         font-size:.7em;
     }
-
     #inicio{
         text-align: center;
     }
-
     #inicio ul{
         display: flex;
         flex-direction: row;
         justify-content: center;
     }
-
     #aboutme{
         grid-template-columns: 1fr;
         grid-template-rows: repeat(3,auto) ;
@@ -476,29 +418,24 @@ input:hover[type="submit"]{
         padding:0;
         width: 166.656px;
     }
-
     #title_aboutme h2{
         font-size: 2em;
         text-align: center;
     }
-
     #title_aboutme:hover{
         cursor: pointer;
         padding: 0%;
         border-radius: 0px;
     }
-
     #text_aboutme{
         padding-top: 1em;
         grid-column: 1;
         grid-row: 3;
         justify-self: center;
     }
-
     #text_aboutme p{
         text-align: center;
     }
-
     #proyect_buttons{
         display:grid;
         grid-template-columns: 1fr;
@@ -508,7 +445,6 @@ input:hover[type="submit"]{
     #proyect_buttons button{
         justify-self: center;
     }
-
     .proyect_container{
         justify-content: center;
     }
@@ -516,11 +452,9 @@ input:hover[type="submit"]{
     #proyects h2, #proyects h3{
         text-align: center;
     }
-
     .gridexp{
         grid-template-columns: repeat(1, 1fr);
     }
-
     .itemform{
         grid-template-columns: 1fr 2fr;
     }

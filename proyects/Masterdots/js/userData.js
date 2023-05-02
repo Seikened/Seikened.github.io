@@ -26,11 +26,12 @@ function userData(nick,size,email,avatarContainer){
     sessionStorage.setItem('geolocalizacionTxt',geolocalizacionTxt); // Guarda la geolocalizacion en el sessionStorage en un formato lista
     sessionStorage.setItem('avatarImg',avatarContainer.src); // Guarda el avatar en el sessionStorage en un formato lista
 }
+
 /**
  * Obtiene los datos del usuario del sessionStorage
  */
 function getUserData(){
-    nick = sessionStorage.getItem('nick');
+    nick = sessionStorage.getItem('nick'); 
     size = sessionStorage.getItem('size');
     email = sessionStorage.getItem('email');
     geolocalizacionTxt = sessionStorage.getItem('geolocalizacionTxt');

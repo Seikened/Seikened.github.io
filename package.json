@@ -1,0 +1,22 @@
+{
+  "name": "seikened.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main_proyect.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seikened/Seikened.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seikened/Seikened.github.io/issues"
+  },
+  "homepage": "https://github.com/Seikened/Seikened.github.io#readme",
+  "dependencies": {
+    "moment": "^2.29.4"
+  }
+}

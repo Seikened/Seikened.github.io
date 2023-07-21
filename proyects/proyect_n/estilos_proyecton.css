@@ -1,45 +1,58 @@
 body {
     background-color: #eee;
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.dropdown-btn{
-    background-color: #4caf50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
+.container {
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+}
+
+#todo-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(224, 142, 183);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ddd;
+    color: #eee;
+    margin-bottom: 20px;
+}
+
+#todo-form input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#todo-form input[type="submit"] {
+    padding: 5px 10px;
     border: none;
+    border-radius: 5px;
+    background-color: #eee;
+    color: rgb(224, 142, 183);
     cursor: pointer;
+    font-weight: bold;
 }
 
-.dropdown{
-    position: relative;
-    display: inline-block;
+#todo-list {
+    list-style: none;
+    padding: 0;
 }
 
-.dropdown-content{
-    display: none;
-    position: absolute;
-    background-color: #f1eded;
-    min-width: 160px;
-    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a{
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover{
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-btn{
-    background-color: #3e8e41;
-} 
-
-.dropdown:hover .dropdown-content {
-    display: block;
+#todo-list li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
 }

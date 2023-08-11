@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-mongoose.connect('mongodb+srv://seiken:fer213142@cluster0.va3sdo5.mongodb.net/miapp?retryWrites=true&w=majority');
+// mongoose.connect('mongodb+srv://seiken:fer213142@cluster0.va3sdo5.mongodb.net/miapp?retryWrites=true&w=majority');
 
 app.get('/' , user.list)
 app.post('/', user.create) 
@@ -19,6 +19,5 @@ app.get('*', (req,res) => {
 })
 
 app.listen(port, () => {
-    console.log('Arrancando la app en el puerto 3000, estas viendo la consola');
-    
+    console.log(`Example app listening at http://localhost:${port}`)
 });

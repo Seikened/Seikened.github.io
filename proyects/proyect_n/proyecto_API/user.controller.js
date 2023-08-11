@@ -25,7 +25,16 @@ const User = {
         res.status(200).send(saveUser);
     },
     destroy: async (req,res) => {
-        res.sendStatus(204).send('Chanchito eliminado')
+        const { id } = req.params;
+        const user = await Users.findOne( { _id: id } );
+        if (user) {
+            await Users.deleteOne ( {_id:id} )
+            console.log('Chanchito eliminado')
+            res.sendStatus(200)
+        }else{
+            console.log('Chanchito no encontrado')
+            res.sendStatus(404)
+        }
     }
 }
 

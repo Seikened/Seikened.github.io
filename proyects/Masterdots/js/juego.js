@@ -6,7 +6,7 @@ var adyacentes = [];
 var idMarcados = [];
 // ************ parseInt(size) es para convertir a numero una string 
 var sizePanel;
-var classMarcado;
+const pi = 3.16;
 var totalSizePanel;
 var idInterval;
 
@@ -17,6 +17,7 @@ var idInterval;
 function getRandom(max){
     return Math.floor(Math.random() * max);
 }
+
 
 /**
  * Funcion que rellena nick y src de avatar
@@ -46,6 +47,8 @@ function pintarPanelJueego(){
     }
     document.getElementById('juego').innerHTML=items;
 }
+
+
 
 /**
  * Calcular el array de los adyacentes

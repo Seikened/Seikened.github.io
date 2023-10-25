@@ -6,6 +6,5 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.11 (Seikened.github.io)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="db4b33680b" level="application" />
   </component>
 </module>

@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/seikened/static/css/main.ab278458.css",
-    "main.js": "/seikened/static/js/main.1d245433.js",
-    "static/js/453.4f1bb154.chunk.js": "/seikened/static/js/453.4f1bb154.chunk.js",
-    "static/media/logo.svg": "/seikened/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/seikened/index.html",
-    "main.ab278458.css.map": "/seikened/static/css/main.ab278458.css.map",
-    "main.1d245433.js.map": "/seikened/static/js/main.1d245433.js.map",
-    "453.4f1bb154.chunk.js.map": "/seikened/static/js/453.4f1bb154.chunk.js.map"
+    "main.css": "/static/css/main.b91bd4f1.css",
+    "main.js": "/static/js/main.9488d373.js",
+    "static/js/453.cbafbb9c.chunk.js": "/static/js/453.cbafbb9c.chunk.js",
+    "index.html": "/index.html",
+    "main.b91bd4f1.css.map": "/static/css/main.b91bd4f1.css.map",
+    "main.9488d373.js.map": "/static/js/main.9488d373.js.map",
+    "453.cbafbb9c.chunk.js.map": "/static/js/453.cbafbb9c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ab278458.css",
-    "static/js/main.1d245433.js"
+    "static/css/main.b91bd4f1.css",
+    "static/js/main.9488d373.js"
   ]
 }

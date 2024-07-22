@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Router basename="/Seikened.github.io">
+    <Router>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/blog" element={<Blog />} />

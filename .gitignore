@@ -2,7 +2,6 @@
 .idea
 .vscode
 **/pythonTools
-node_modules
-build
 .cache
 .DS_Store
+node_modules

@@ -1,30 +1,39 @@
---- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/tailwind.config.js ---
-module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}', 
-    './public/index.html'
-  ],
-  theme: {
-    extend: {
-      colors: {
-        primary: '#FEF3E2',  // Blanco crema
-        secondary: '#2E2E2E', // Gris mate
-        tertiary: '#DE58D2' // Rosado
-      },
-    },
-  },
-  plugins: [],
-}
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/index.tsx ---
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './index.css'; // Importa el CSS compilado
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import Blog from './pages/Blog';
+import Portfolio from './pages/Portfolio';
+import About from './pages/About';
 
---- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/tailwind.config.js ---
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
+  <React.StrictMode>
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
+  </React.StrictMode>
+);
+
+reportWebVitals();
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/index.tsx ---
 
 --- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/App.tsx ---
 import React, { useState, useEffect } from 'react';
 import LandingPage from './pages/LandingPage';
-import './Switch.css'; // Importa el archivo CSS personalizado
-
-// const fullConfig = resolveConfig(tailwindConfig);
-// const themeColors = fullConfig.theme.colors;
+import './Switch.css'; // Importa el archivo CSS personalizado si es necesario
 
 const Switch: React.FC<{ isOn: boolean, handleToggle: () => void }> = ({ isOn, handleToggle }) => {
   return (
@@ -37,40 +46,30 @@ const Switch: React.FC<{ isOn: boolean, handleToggle: () => void }> = ({ isOn, h
   );
 };
 
-// Componente principal de la aplicación
 const App: React.FC = () => {
   const [isDay, setIsDay] = useState(true);
 
-  // Efecto que determina si es de día o de noche basado en la hora actual
   useEffect(() => {
     const hour = new Date().getHours();
     setIsDay(hour >= 6 && hour < 18);
   }, []);
 
-  // Configuración de colores según el día o la noche
-  const colors = {
-    primary: isDay ? '#FEF3E2' : '#2E2E2E', // Usa valores de color directamente
-    secondary: isDay ? '#2E2E2E' : '#FEF3E2',
-    tertiary: '#DE58D2',
-  };
-
-  // Función para alternar entre día y noche
   const toggleDayNight = () => {
     setIsDay((prev) => !prev);
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center" style={{ backgroundColor: colors.primary, color: colors.secondary }}>
+    <div className={`min-h-screen flex flex-col justify-center items-center ${isDay ? 'bg-primary'  : 'bg-secondary '}`}>
       <Switch isOn={isDay} handleToggle={toggleDayNight} />
-      <h1 className={`text-2xl font-semibold mb-4`} style={{ color: 'var(--tw-color-primary)' }}>
+      <h1 className="text-2xl font-semibold mb-4 ">
         {isDay ? 'Buenos Días ☀️' : 'Buenas noches 🌙'}
       </h1>
-
       <LandingPage
-        nodeColor={colors.secondary}
-        linkColor={colors.secondary}
-        hoverColor={colors.tertiary}
-        textOpacity={0.20}
+        nodeColor={isDay ? 'fill-secondary' : 'fill-primary'}
+        linkColor={isDay ? 'stroke-secondary' : 'stroke-primary'}
+        hoverColor="stroke-tertiary"
+        textColor = {isDay ? 'fill-secondary text-lg font-bold' : 'fill-primary text-lg font-bold'}
+        textOpacity={0.15}
         isDay={isDay}
       />
     </div>
@@ -136,249 +135,75 @@ test('renders learn react link', () => {
 
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/App.css ---
 
---- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/components/PhysicsGraph.tsx ---
-import React, { useRef, useEffect } from 'react';
-// Importa React y los hooks useRef y useEffect
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/index.css ---
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-import * as d3 from 'd3';
-// Importa toda la biblioteca d3
-
-// Comenta las importaciones no necesarias
-// import resolveConfig from 'tailwindcss/resolveConfig';
-// import tailwindConfig from '../../tailwind.config.js';
-
-// interface para Node y Link
-interface Node extends d3.SimulationNodeDatum {
-  id: string;
-  url?: string;
-  color?: string;
-  radius?: number;
-  label?: string;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-interface Link extends d3.SimulationLinkDatum<Node> {
-  source: string | Node;
-  target: string | Node;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
-interface PhysicsGraphProps {
-  nodes: Node[];
-  links: Link[];
-  centralNodeId: string;
-  nodeColor?: string;
-  linkColor?: string;
-  hoverColor?: string;
-  textOpacity?: number;
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/index.css ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/pages/LandingPage.tsx ---
+import React from 'react';
+import PhysicsGraph from '../components/PhysicsGraph';
+
+interface LandingPageProps {
+  nodeColor: string;
+  linkColor: string;
+  hoverColor: string;
+  textColor: string;
+  textOpacity: number;
   isDay: boolean;
 }
 
-// Comenta las resoluciones de configuración no necesarias
-// const fullConfig = resolveConfig(tailwindConfig);
-// const themeColors = fullConfig.theme.colors;
+// Componente de la página de inicio
+const LandingPage: React.FC<LandingPageProps> = ({ nodeColor, linkColor, hoverColor,textColor, textOpacity, isDay }) => {
+  const nodes = [
+    { id: 'center', label: 'Fernando Leon Franco', radius: 30 },
+    { id: 'Blog', label: 'Blog', url: '/blog', radius: 20 },
+    { id: 'Portfolio', label: 'Portfolio', url: '/portfolio', radius: 20 },
+    { id: 'About', label: 'About me', url: '/about', radius: 20 },
+  ];
 
-const PhysicsGraph: React.FC<PhysicsGraphProps> = ({
-  nodes,
-  links,
-  centralNodeId,
-  nodeColor = 'fill-primary', // Usa las clases de Tailwind directamente
-  linkColor = 'stroke-primary', // Usa las clases de Tailwind directamente
-  hoverColor = 'stroke-tertiary', // Usa las clases de Tailwind directamente
-  textOpacity = 0.15,
-  isDay,
-}) => {
-  const svgRef = useRef<SVGSVGElement>(null);
-  // Crea una referencia para el elemento SVG
-
-  useEffect(() => {
-    const svg = d3.select(svgRef.current);
-    svg.selectAll('*').remove(); // Limpia el contenido SVG previo
-
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    // Define el ancho y alto del SVG basado en el tamaño de la ventana
-
-    const simulation = d3.forceSimulation(nodes as d3.SimulationNodeDatum[])
-      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(200))
-      .force('charge', d3.forceManyBody().strength(-500))
-      .force('center', d3.forceCenter(width / 2, height / 2));
-    // Configura la simulación de fuerzas de D3 para los nodos y enlaces
-
-    const link = svg.append('g')
-      .attr('class', 'links')
-      .selectAll('line')
-      .data(links)
-      .enter()
-      .append('line')
-      .attr('stroke', linkColor);
-    // Agrega enlaces (líneas) al SVG y les asigna un color
-
-    const node = svg.append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
-      .data(nodes)
-      .enter()
-      .append('circle')
-      .attr('r', (d: any) => d.radius || (d.id === centralNodeId ? 30 : 20))
-      .attr('fill', (d: any) => d.color || nodeColor)
-      // Agrega nodos (círculos) al SVG y les asigna un radio y color
-
-      // Define el comportamiento al pasar el mouse sobre un nodo (hover)
-      .on('mouseover', function (event, d) {
-        // Selecciona el nodo actual y cambia su borde al color de hover y ancho de borde a 3
-        d3.select(this).attr('stroke', hoverColor).attr('stroke-width', 3);
-        
-        // Selecciona el texto asociado al nodo actual y cambia su opacidad a 1 (completamente visible)
-        d3.select(`#text-${d.id}`).attr('opacity', 1);
-
-        // Selecciona todas las líneas de enlace
-        d3.selectAll('.links line')
-          // Cambia el color de todas las líneas al color de hover
-          .attr('stroke', hoverColor);
-
-        // Selecciona todos los nodos y filtra aquellos que no son el nodo actual
-        d3.selectAll('circle')
-          .filter((n: any) => n.id !== d.id)
-          // Cambia el color de relleno de los nodos no seleccionados al color de hover
-          .attr('fill', hoverColor)
-          // Cambia la opacidad de los nodos no seleccionados a 1 (completamente visible)
-          .attr('opacity', 1);
-
-        // Selecciona todos los textos y filtra aquellos que no están asociados al nodo actual
-        d3.selectAll('text')
-          .filter((n: any) => n.id !== d.id)
-          // Cambia la opacidad de los textos no seleccionados a 0 (invisible)
-          .attr('opacity', 0);
-      })
-
-
-      // Define el comportamiento al quitar el mouse de un nodo
-      .on('mouseout', function (event, d) {
-        // Restaura el borde del nodo actual (elimina el color y el ancho del borde)
-        d3.select(this).attr('stroke', null);
-        
-        // Restaura la opacidad del texto asociado al nodo actual a su valor original
-        d3.select(`#text-${d.id}`).attr('opacity', textOpacity);
-
-        // Selecciona todas las líneas de enlace y filtra aquellas que están conectadas al nodo actual
-        d3.selectAll('.links line')
-
-          // Restaura el color de las líneas conectadas al nodo actual al color original
-          .attr('stroke', linkColor);
-
-        // Selecciona todos los nodos y filtra aquellos que no son el nodo actual
-        d3.selectAll('circle')
-          .filter((n: any) => n.id !== d.id)
-          // Restaura el color de relleno de los nodos no seleccionados a su color original
-          .attr('fill', (n: any) => n.color || nodeColor)
-          // Restaura la opacidad de los nodos no seleccionados a 1 (completamente visible)
-          .attr('opacity', 1);
-
-        // Selecciona todos los textos y filtra aquellos que no están asociados al nodo actual
-        d3.selectAll('text')
-          .filter((n: any) => n.id !== d.id)
-          // Restaura la opacidad de los textos no seleccionados a su valor original
-          .attr('opacity', textOpacity);
-      })
-
-      // Define el comportamiento al hacer clic en un nodo
-      .on('click', function (event, d: any) {
-        // Si el nodo tiene una URL asociada, redirige el navegador a esa URL
-        if (d.url) window.location.href = d.url;
-      })
-
-      // Configura el comportamiento de arrastrar (drag) para los nodos
-      .call(d3.drag<SVGCircleElement, Node>()
-        // Define el comportamiento al iniciar el arrastre de un nodo
-        .on('start', (event: any, d: Node) => dragstarted(event, d))
-        // Define el comportamiento al arrastrar un nodo
-        .on('drag', (event: any, d: Node) => dragged(event, d))
-        // Define el comportamiento al finalizar el arrastre de un nodo
-        .on('end', (event: any, d: Node) => dragended(event, d))
-      );
-
-
-      const text = svg.append('g')
-      .attr('class', 'texts')
-      .selectAll('text')
-      .data(nodes)
-      .enter()
-      .append('text')
-      .attr('id', (d: any) => `text-${d.id}`)
-      .attr('dx', (d: any) => {
-        const offset = d.radius || (d.id === centralNodeId ? 30 : 20);
-        return offset + 5;
-      }) // Posiciona el texto de manera proporcional al tamaño del nodo
-      .attr('dy', 4)
-      .attr('opacity', textOpacity)
-      .attr('class', 'text-lg font-bold fill-current')  // Usar fill-current para heredar el color del padre
-      .attr('fill', isDay ? 'text-primary' : 'text-secondary')  // Asegurarse de aplicar el color correcto
-      .text((d: any) => d.label || d.id)
-      .on('click', function (event, d: any) {
-        if (d.url) window.location.href = d.url;
-      });
-      // Agrega y configura el texto de cada nodo
-
-    simulation.on('tick', () => {
-      link
-        .attr('x1', (d: any) => (d.source as any).x)
-        .attr('y1', (d: any) => (d.source as any).y)
-        .attr('x2', (d: any) => (d.target as any).x)
-        .attr('y2', (d: any) => (d.target as any).y);
-
-      node
-        .attr('cx', (d: any) => d.x)
-        .attr('cy', (d: any) => d.y);
-
-      text
-        .attr('x', (d: any) => d.x)
-        .attr('y', (d: any) => d.y);
-    });
-    // Define cómo deben actualizarse los enlaces, nodos y textos en cada tick de la simulación
-
-    // Movimiento oscilante
-    d3.interval(() => {
-      nodes.forEach((node) => {
-        node.x! += Math.sin(Date.now() / 1000) * 2;
-        node.y! += Math.cos(Date.now() / 1000) * 2;
-      });
-      simulation.alpha(0.3).restart();
-    }, 100);
-    // Agrega un movimiento oscilante a los nodos
-
-    function dragstarted(event: any, d: Node) {
-      if (!event.active) simulation.alphaTarget(0.3).restart();
-      d.fx = d.x;
-      d.fy = d.y;
-    }
-    // Función para manejar el inicio del arrastre de un nodo
-
-    function dragged(event: any, d: Node) {
-      d.fx = event.x;
-      d.fy = event.y;
-    }
-    // Función para manejar el arrastre de un nodo
-
-    function dragended(event: any, d: Node) {
-      if (!event.active) simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
-    }
-    // Función para manejar el final del arrastre de un nodo
-
-  }, [nodes, links, centralNodeId, nodeColor, linkColor, hoverColor, textOpacity, isDay]);
-  // useEffect para actualizar la simulación cuando cambian los nodos, enlaces o colores
+  const links = [
+    { source: 'center', target: 'Blog' },
+    { source: 'center', target: 'Portfolio' },
+    { source: 'center', target: 'About' },
+  ];
 
   return (
-    <svg ref={svgRef} width="100%" height="100vh" style={{ backgroundColor: 'transparent' }}>
-      <g className="nodes"></g>
-      <g className="links"></g>
-    </svg>
+    <div className={`w-full h-full`}>
+      <div className="w-full h-full">
+        <PhysicsGraph
+          nodes={nodes}
+          links={links}
+          centralNodeId="center"
+          nodeColor={nodeColor}
+          linkColor={linkColor}
+          hoverColor={hoverColor}
+          textColor={textColor}
+          textOpacity={textOpacity}
+          isDay={isDay}
+        />
+      </div>
+    </div>
   );
-  // Renderiza el SVG con las referencias a los nodos y enlaces
 };
 
-export default PhysicsGraph;
-// Exporta el componente PhysicsGraph como predeterminado
+export default LandingPage;
 
---- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/components/PhysicsGraph.tsx ---
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/seiken/src/pages/LandingPage.tsx ---
 

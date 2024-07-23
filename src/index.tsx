@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Router basename={process.env.NODE_ENV === 'development' ? '/' : '/'}> {/* Ajuste para producción */}
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/blog" element={<Blog />} />

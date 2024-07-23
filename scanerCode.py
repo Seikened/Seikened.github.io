@@ -64,7 +64,7 @@ def main():
     ]
     
 
-    nombres_archivos = ['PhysicsGraph','App','secondary','tailwind.config']# ['PhysicsGraph','LandingPage','App','index','tailwind.config']
+    nombres_archivos = ['package','App','LandingPage','index']# ['PhysicsGraph','LandingPage','App','index','tailwind.config']
     archivo_salida = 'codigo_concatenado.txt'
 
     archivos_encontrados = buscar_archivos(directorios, nombres_archivos)

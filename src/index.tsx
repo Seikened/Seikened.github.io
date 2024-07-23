@@ -8,18 +8,13 @@ import Blog from './pages/Blog';
 import Portfolio from './pages/Portfolio';
 import About from './pages/About';
 
-// Condicionar el uso de basename según el entorno
-console.log('NODE_ENV:', process.env.NODE_ENV);
-
-const basename = process.env.NODE_ENV === 'production' ? '/Seikened.github.io' : '/';
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
   <React.StrictMode>
-    <Router basename={basename}>
+    <Router basename={process.env.NODE_ENV === 'development' ? '/' : '/'}> {/* Ajuste para producción */}
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/blog" element={<Blog />} />

@@ -2,7 +2,7 @@
   "name": "seiken",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Seikened.github.io",
+  "homepage": "https://perfil.leonesfrancos.com",
   "dependencies": {
     "@react-spring/web": "^9.7.4",
     "@testing-library/jest-dom": "^5.17.0",

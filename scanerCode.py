@@ -7,7 +7,7 @@ def buscar_archivos(directorios, nombres_archivos, extensiones_permitidas=None, 
     """
     archivos_encontrados = []
     if extensiones_permitidas is None:
-        extensiones_permitidas = ['.py', '.js', '.jsx', '.ts', '.tsx','css']
+        extensiones_permitidas = ['.py', '.js', '.jsx', '.ts', '.tsx','css','md']
     if excluir_carpetas is None:
         excluir_carpetas = ['__pycache__', 'node_modules']
 
@@ -60,11 +60,13 @@ def escribir_salida(contenido, archivo_salida):
 
 def main():
     directorios = [
-        '/Users/fernandoleonfranco/Documents/GitHub/seiken',
+        '/Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io'
     ]
     
 
-    nombres_archivos = ['package','App','LandingPage','index']# ['PhysicsGraph','LandingPage','App','index','tailwind.config']
+# ['package','App','LandingPage','index']# ['PhysicsGraph','LandingPage','App','index','tailwind.config']
+
+    nombres_archivos =  ['Blog','Sidebar','TestPost','App','index']
     archivo_salida = 'codigo_concatenado.txt'
 
     archivos_encontrados = buscar_archivos(directorios, nombres_archivos)

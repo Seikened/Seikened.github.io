@@ -1,27 +1,34 @@
-// src/pages/Blog.tsx
-import React from 'react';
+import { useLocation } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
 
-const Blog: React.FC = () => {
+// Automatizar la búsqueda de componentes en la carpeta 'posts'
+const postFiles = require.context('../posts', true, /\.tsx$/);
+
+const componentsMap: { [key: string]: React.FC } = postFiles.keys().reduce((map, path) => {
+  const name = path.match(/\/([^/]+)\.tsx$/)?.[1]?.toLowerCase();
+  if (name) {
+    map[name] = postFiles(path).default;
+  }
+  return map;
+}, {} as { [key: string]: React.FC });
+
+const Blog = () => {
+  const location = useLocation();
+  const path = location.pathname.split("/").pop()?.toLowerCase();
+
+  console.log("Path desde useLocation:", path);
+
+  const PostComponent = path ? componentsMap[path] : null;
+
+  console.log("PostComponent asignado:", PostComponent);
+
   return (
-    <div className="bg-gray-100 min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-8 text-blue-600">Blog</h1>
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Primer Post</h2>
-        <p className="text-gray-600">
-          Este es un párrafo de prueba para ver cómo se aplican los estilos de Tailwind CSS.
-        </p>
-        <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
-          Leer más
-        </button>
+    <div className="flex min-h-screen">
+      <div className="w-1/4 bg-gray-200">
+        <Sidebar />
       </div>
-      <div className="bg-white p-6 mt-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Segundo Post</h2>
-        <p className="text-gray-600">
-          Otro párrafo de prueba con diferentes estilos aplicados.
-        </p>
-        <button className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">
-          Leer más
-        </button>
+      <div className="flex-1 p-8">
+        {PostComponent ? <PostComponent /> : <p>Selecciona un post del menú lateral.</p>}
       </div>
     </div>
   );

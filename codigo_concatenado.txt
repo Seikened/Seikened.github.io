@@ -1,0 +1,345 @@
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/tailwind.config.js ---
+// tailwind.config.js
+module.exports = {
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}', 
+    './public/index.html'
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#FEF3E2',  // Blanco crema
+        secondary: '#2E2E2E', // Gris mate
+        tertiary: '#DE58D2' // Rosado
+      },
+    },
+  },
+  plugins: [],
+}
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/tailwind.config.js ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.tsx ---
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import Blog from './pages/Blog';
+import Portfolio from './pages/Portfolio';
+import About from './pages/About';
+import { DayNightProvider } from './components/DayNightContext';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+root.render(
+  <React.StrictMode>
+    <DayNightProvider>
+      <Router basename={process.env.PUBLIC_URL}>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/blog/*" element={<Blog />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Router>
+    </DayNightProvider>
+  </React.StrictMode>
+);
+
+reportWebVitals();
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.tsx ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.tsx ---
+import React, { useContext } from 'react';
+import LandingPage from './pages/LandingPage';
+import { DayNightContext, DayNightProvider } from './components/DayNightContext';
+import './Switch.css'; // Importa el archivo CSS personalizado si es necesario
+
+const Switch: React.FC<{ isOn: boolean, handleToggle: () => void }> = ({ isOn, handleToggle }) => {
+  return (
+    <div
+      className={`switch ${isOn ? 'switch-on' : 'switch-off'} absolute top-2 left-2`} // Posición absoluta para el switch
+      onClick={handleToggle}
+    >
+      <div className="switch-handle" />
+    </div>
+  );
+};
+
+const AppContent: React.FC = () => {
+  const { isDay, toggleDayNight } = useContext(DayNightContext);
+
+  return (
+    <div className={`min-h-screen flex flex-col justify-center items-center ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
+      <Switch isOn={isDay} handleToggle={toggleDayNight} />
+      <h1 className="text-2xl font-semibold mb-4">
+        {isDay ? 'Buenos Días ☀️' : 'Buenas noches 🌙'}
+      </h1>
+      <LandingPage
+        nodeColor={isDay ? 'fill-secondary' : 'fill-primary'}
+        linkColor={isDay ? 'stroke-secondary' : 'stroke-primary'}
+        hoverColor="stroke-tertiary"
+        textColor = {isDay ? 'fill-secondary text-lg font-bold' : 'fill-primary text-lg font-bold'}
+        textOpacity={0.15}
+        isDay={isDay}
+      />
+    </div>
+  );
+};
+
+const App: React.FC = () => (
+  <DayNightProvider>
+    <AppContent />
+  </DayNightProvider>
+);
+
+export default App;
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.tsx ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.test.tsx ---
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.test.tsx ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.css ---
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.css ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.css ---
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importar la fuente Cascadia Code */
+@font-face {
+  font-family: 'Cascadia Code';
+  src: url('../public/fonts/CascadiaCode.woff2') format('woff2'),
+       url('../public/fonts/CascadiaCodeItalic.woff2') format('woff2'),
+       url('../public/fonts/CascadiaCodeNF.woff2') format('woff2'),
+       url('../public/fonts/CascadiaCodeNFItalic.woff2') format('woff2'),
+       url('../public/fonts/CascadiaCodePL.woff2') format('woff2'),
+       url('../public/fonts/CascadiaCodePLItalic.woff2') format('woff2'),
+       url('../public/fonts/CascadiaMono.woff2') format('woff2'),
+       url('../public/fonts/CascadiaMonoItalic.woff2') format('woff2'),
+       url('../public/fonts/CascadiaMonoNF.woff2') format('woff2'),
+       url('../public/fonts/CascadiaMonoNFItalic.woff2') format('woff2'),
+       url('../public/fonts/CascadiaMonoPL.woff2') format('woff2'),
+       url('../public/fonts/CascadiaMonoPLItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: 'Cascadia Code', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'Cascadia Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.css ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/posts/TestPost.tsx ---
+import React from 'react';
+
+const TestPost = () => (
+  <div className="p-4 bg-white rounded shadow-md">
+    <h1 className="text-2xl font-bold mb-2 text-secondary">Test Post</h1>
+    <p className="text-sm text-gray-500">2024-08-06</p>
+    <p>Este es el contenido del post de prueba.</p>
+  </div>
+);
+
+// Definimos los metadatos como propiedades estáticas del componente
+TestPost.metadata = {
+  title: "Test Post",
+  date: "2024-08-06"
+};
+
+export default TestPost;
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/posts/TestPost.tsx ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/components/Sidebar.tsx ---
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const postFiles = require.context('../posts', true, /\.tsx$/);
+
+const posts = postFiles.keys().map(path => {
+  const module = postFiles(path).default;
+  
+  const metadata = module.metadata;
+
+  return {
+    name: path.match(/\/([^/]+)\.tsx$/)?.[1]?.toLowerCase(),
+    displayName: metadata?.title || 'No Title',
+    date: metadata?.date || 'No Date'
+  };
+});
+
+const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
+  return (
+    <div className={`p-4 ${isDay ? 'bg-primary' : 'bg-secondary'} h-full`}>
+      {posts.map(post => (
+        <div key={post.name} className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-white' : 'bg-gray-800'} rounded-lg shadow-md`}>
+          <Link to={`/blog/${post.name}`} className={`font-semibold ${isDay ? 'text-blue-600' : 'text-blue-300'} hover:underline`}>
+            {post.displayName}
+          </Link>
+          <span className={`text-sm ${isDay ? 'text-gray-500' : 'text-gray-400'}`}>{post.date}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Sidebar;
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/components/Sidebar.tsx ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/LandingPage.tsx ---
+import React from 'react';
+import PhysicsGraph from '../components/PhysicsGraph';
+
+interface LandingPageProps {
+  nodeColor: string;
+  linkColor: string;
+  hoverColor: string;
+  textColor: string;
+  textOpacity: number;
+  isDay: boolean;
+}
+
+// Componente de la página de inicio
+const LandingPage: React.FC<LandingPageProps> = ({ nodeColor, linkColor, hoverColor,textColor, textOpacity, isDay }) => {
+  const nodes = [
+    { id: 'center', label: 'Fernando Leon Franco', radius: 30 },
+    { id: 'Blog', label: 'Blog', url: '/blog', radius: 20 },
+    { id: 'Portfolio', label: 'Portfolio', url: '/portfolio', radius: 20 },
+    { id: 'About', label: 'About me', url: '/about', radius: 20 },
+  ];
+
+  const links = [
+    { source: 'center', target: 'Blog' },
+    { source: 'center', target: 'Portfolio' },
+    { source: 'center', target: 'About' },
+  ];
+
+  return (
+    <div className={`w-full h-full`}>
+      <div className="w-full h-full">
+        <PhysicsGraph
+          nodes={nodes}
+          links={links}
+          centralNodeId="center"
+          nodeColor={nodeColor}
+          linkColor={linkColor}
+          hoverColor={hoverColor}
+          textColor={textColor}
+          textOpacity={textOpacity}
+          isDay={isDay}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default LandingPage;
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/LandingPage.tsx ---
+
+--- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/Blog.tsx ---
+import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
+import { DayNightContext } from '../components/DayNightContext';
+
+const postFiles = require.context('../posts', true, /\.tsx$/);
+
+const componentsMap: { [key: string]: React.FC & { metadata?: { title: string, date: string } } } = postFiles.keys().reduce((map, path) => {
+  const name = path.match(/\/([^/]+)\.tsx$/)?.[1]?.toLowerCase();
+  if (name) {
+    map[name] = postFiles(path).default;
+  }
+  return map;
+}, {} as { [key: string]: React.FC & { metadata?: { title: string, date: string } } });
+
+const Blog: React.FC = () => {
+  const location = useLocation();
+  const path = location.pathname.split("/").pop()?.toLowerCase();
+  const { isDay } = useContext(DayNightContext);
+
+  const PostComponent = path ? componentsMap[path] : null;
+
+  return (
+    <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'} text-secondary`}>
+      <div className="w-1/4 bg-gray-200">
+        <Sidebar isDay={isDay} />
+      </div>
+      <div className="flex-1 p-8">
+        {PostComponent ? <PostComponent /> : <p>Selecciona un post del menú lateral.</p>}
+      </div>
+    </div>
+  );
+};
+
+export default Blog;
+
+--- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/Blog.tsx ---
+

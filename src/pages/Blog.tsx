@@ -21,8 +21,8 @@ const Blog: React.FC = () => {
   const PostComponent = path ? componentsMap[path] : null;
 
   return (
-    <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'} text-secondary`}>
-      <div className="w-1/4 bg-gray-200">
+    <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
+      <div className="w-1/4">
         <Sidebar isDay={isDay} />
       </div>
       <div className="flex-1 p-8">

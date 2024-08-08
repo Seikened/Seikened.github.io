@@ -34,3 +34,33 @@ code {
   font-family: 'Cascadia Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fade-out {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.fade-out::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50px; /* Ajusta este valor según lo necesites */
+  background: linear-gradient(to left, #FEF3E2, rgba(255,255,255,0));
+}
+
+/* Clase para fijar el ancho de la fecha */
+.fixed-width {
+  min-width: 5.9rem; /* Ajusta el valor según sea necesario */
+  text-align: right;
+  white-space: nowrap;
+}

@@ -17,7 +17,7 @@ const posts = postFiles.keys().map(path => {
 
 const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
   return (
-    <div className={`p-4 ${isDay ? 'bg-secondary' : 'bg-secondary'} h-full border-r-2`}>
+    <div className={`p-4 ${isDay ? 'bg-secondary' : 'bg-primary'} h-full border-r-2`}>
       {posts.map(post => (
         <div 
           key={post.name} 
@@ -25,11 +25,11 @@ const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
         >
           <Link 
             to={`/blog/${post.name}`} 
-            className={`flex-grow font-semibold ${isDay ? 'text-secondary' : 'text-primary'} group-hover:text-tertiary transition duration-300 ease-in-out`}
+            className={`flex-grow font-semibold truncate ${isDay ? 'text-secondary' : 'text-primary'} group-hover:text-tertiary transition duration-300 ease-in-out`}
           >
-            {post.displayName}
+            <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out">{post.displayName}</span>
           </Link>
-          <span className={`text-sm ${isDay ? 'text-gray-500' : 'text-gray-400'}`}>{post.date}</span>
+          <span className={`text-sm ${isDay ? 'text-gray-500' : 'text-gray-400'} ml-2 fixed-width`}>{post.date}</span>
         </div>
       ))}
     </div>

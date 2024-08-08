@@ -4,32 +4,31 @@ import { DayNightContext } from '../components/DayNightContext';
 
 interface PostComponentWithMetadata extends React.FC {
   metadata?: {
-    title: string;     // Título del post
-    date: string;      // Fecha del post en formato YYYY-MM-DD
+    title: string;
+    date: string;
   };
 }
 
-const DATE = "2024-08-20"; // Definimos la constante para la fecha
+const DATE = "2023-08-10";
+const TITLE = "Desarrollo de GestorPropiedades";
 
 const PostComponent: PostComponentWithMetadata = () => {
   const { isDay } = useContext(DayNightContext);
 
-  // Formatear la fecha a DD-MM-YYYY usando date-fns
   const formattedDate = format(parseISO(DATE), 'dd-MM-yyyy');
 
   return (
     <div className={`max-w-4xl mx-auto rounded-md p-4 border-l-4 ${isDay ? 'bg-primary text-secondary border-secondary' : 'bg-secondary text-primary border-primary'}`}>
-      <h1 className={`text-4xl font-bold mb-2 ${isDay ? 'text-secondary' : 'text-primary'}`}>Blog 2</h1>
+      <h1 className={`text-4xl font-bold mb-2 ${isDay ? 'text-secondary' : 'text-primary'}`}>{TITLE}</h1>
       <p className="text-sm text-gray-500">{formattedDate}</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptas aspernatur minus accusantium, id saepe provident quasi. Excepturi aliquid ad recusandae minus libero officia vitae voluptate quos odit. Hic, laudantium?</p>
+      <p>En agosto de 2023, comencé a desarrollar GestorPropiedades, una aplicación diseñada para ayudar en la gestión de propiedades inmobiliarias. Este proyecto ha sido una oportunidad increíble para aplicar mis conocimientos en Django y Tailwind CSS.</p>
     </div>
   );
 };
 
-// Definimos los metadatos como propiedades estáticas del componente
 PostComponent.metadata = {
-  title: "Blog 2 de prueba pero veremos que tan largo se vuelve todo esto por que no seberia ser largo",
-  date: DATE // Fecha en formato YYYY-MM-DD
+  title: TITLE,
+  date: DATE
 };
 
 export default PostComponent;

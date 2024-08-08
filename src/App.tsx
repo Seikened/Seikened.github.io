@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import LandingPage from './pages/LandingPage';
+import { DayNightContext, DayNightProvider } from './components/DayNightContext';
 import './Switch.css'; // Importa el archivo CSS personalizado si es necesario
 
 const Switch: React.FC<{ isOn: boolean, handleToggle: () => void }> = ({ isOn, handleToggle }) => {
@@ -13,22 +14,13 @@ const Switch: React.FC<{ isOn: boolean, handleToggle: () => void }> = ({ isOn, h
   );
 };
 
-const App: React.FC = () => {
-  const [isDay, setIsDay] = useState(true);
-
-  useEffect(() => {
-    const hour = new Date().getHours();
-    setIsDay(hour >= 6 && hour < 18);
-  }, []);
-
-  const toggleDayNight = () => {
-    setIsDay((prev) => !prev);
-  };
+const AppContent: React.FC = () => {
+  const { isDay, toggleDayNight } = useContext(DayNightContext);
 
   return (
-    <div className={`min-h-screen flex flex-col justify-center items-center ${isDay ? 'bg-primary'  : 'bg-secondary '}`}>
+    <div className={`min-h-screen flex flex-col justify-center items-center ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
       <Switch isOn={isDay} handleToggle={toggleDayNight} />
-      <h1 className="text-2xl font-semibold mb-4 ">
+      <h1 className="text-2xl font-semibold mb-4">
         {isDay ? 'Buenos Días ☀️' : 'Buenas noches 🌙'}
       </h1>
       <LandingPage
@@ -42,5 +34,11 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+const App: React.FC = () => (
+  <DayNightProvider>
+    <AppContent />
+  </DayNightProvider>
+);
 
 export default App;

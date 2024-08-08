@@ -1,31 +1,29 @@
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
+import { DayNightContext } from '../components/DayNightContext';
 
-// Automatizar la búsqueda de componentes en la carpeta 'posts'
 const postFiles = require.context('../posts', true, /\.tsx$/);
 
-const componentsMap: { [key: string]: React.FC } = postFiles.keys().reduce((map, path) => {
+const componentsMap: { [key: string]: React.FC & { metadata?: { title: string, date: string } } } = postFiles.keys().reduce((map, path) => {
   const name = path.match(/\/([^/]+)\.tsx$/)?.[1]?.toLowerCase();
   if (name) {
     map[name] = postFiles(path).default;
   }
   return map;
-}, {} as { [key: string]: React.FC });
+}, {} as { [key: string]: React.FC & { metadata?: { title: string, date: string } } });
 
-const Blog = () => {
+const Blog: React.FC = () => {
   const location = useLocation();
   const path = location.pathname.split("/").pop()?.toLowerCase();
-
-  console.log("Path desde useLocation:", path);
+  const { isDay } = useContext(DayNightContext);
 
   const PostComponent = path ? componentsMap[path] : null;
 
-  console.log("PostComponent asignado:", PostComponent);
-
   return (
-    <div className="flex min-h-screen">
+    <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'} text-secondary`}>
       <div className="w-1/4 bg-gray-200">
-        <Sidebar />
+        <Sidebar isDay={isDay} />
       </div>
       <div className="flex-1 p-8">
         {PostComponent ? <PostComponent /> : <p>Selecciona un post del menú lateral.</p>}

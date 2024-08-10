@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'; 
 import { DayNightContext } from '../components/DayNightContext';
@@ -23,6 +23,7 @@ const Blog: React.FC = () => {
 
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isFullScreen, setFullScreen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const handlePostClick = () => {
     setSidebarVisible(false); 
@@ -34,9 +35,30 @@ const Blog: React.FC = () => {
     setSidebarVisible(true);
   };
 
+  // Actualiza la barra de progreso de scroll
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    setScrollProgress(scrollPercent);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
       
+      {/* Barra de progreso de scroll */}
+      <div 
+        className="fixed top-0 left-0 h-1 z-20 bg-tertiary" 
+        style={{ width: `${scrollProgress}%` }} 
+      />
+
       {/* Sidebar Container */}
       <motion.div
         initial={{ x: 0 }}
@@ -51,7 +73,6 @@ const Blog: React.FC = () => {
       <motion.div
         className={`flex-1 transition-all duration-500 ease-in-out ${isSidebarVisible ? 'ml-0 lg:ml-64' : 'ml-0'} pt-16 pb-16`}
         transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
-        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
       >
         {PostComponent ? (
           <div className="max-w-4xl mx-auto">

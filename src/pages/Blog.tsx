@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../components/Sidebar'; // Mantén tu propio componente Sidebar
+import Sidebar from '../components/Sidebar'; 
 import { DayNightContext } from '../components/DayNightContext';
 import { motion } from 'framer-motion';
 
@@ -23,39 +23,34 @@ const Blog: React.FC = () => {
 
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isFullScreen, setFullScreen] = useState(false);
-  const [sidebarRendered, setSidebarRendered] = useState(true); // Estado para controlar la renderización
 
   const handlePostClick = () => {
     setSidebarVisible(false);  // Oculta el sidebar al hacer clic en un post
-    setTimeout(() => setSidebarRendered(false), 500); // Espera a que la animación termine antes de ocultarlo completamente
     setFullScreen(true);
   };
 
   const handleExitFullScreen = () => {
-    setSidebarRendered(true);
-    setTimeout(() => setSidebarVisible(true), 50); // Espera antes de mostrar el sidebar con animación
-    setFullScreen(false); 
+    setFullScreen(false);  // Muestra el sidebar al salir de la vista de pantalla completa
+    setSidebarVisible(true);
   };
 
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
       
       {/* Sidebar Container */}
-      {sidebarRendered && (
-        <motion.div
-          initial={{ x: 0 }}
-          animate={{ x: isSidebarVisible && !isFullScreen ? '0%' : '-100%' }} 
-          transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
-          className="w-1/4"
-        >
-          <Sidebar isDay={isDay} />
-        </motion.div>
-      )}
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: isSidebarVisible && !isFullScreen ? '0%' : '-100%' }} 
+        transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
+        className={`w-1/4 h-full fixed top-0 left-0 z-10`}
+      >
+        <Sidebar isDay={isDay} />
+      </motion.div>
 
       {/* Main Content Area */}
       <motion.div
-        className={`transition-all duration-500 ease-in-out ${isSidebarVisible ? 'w-3/4' : 'w-full'}`}
-        animate={{ width: isSidebarVisible ? '75%' : '100%' }}
+        className={`flex-1 transition-all duration-500 ease-in-out ${isSidebarVisible ? 'ml-0 lg:ml-64' : 'ml-0'}`}
+        animate={{ paddingLeft: isSidebarVisible ? '16rem' : '0', width: isSidebarVisible ? 'calc(100% - 16rem)' : '100%' }}
         transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
         style={{ paddingTop: '2rem' }}
       >

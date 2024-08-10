@@ -22,7 +22,7 @@ const Blog: React.FC = () => {
 
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isFullScreen, setFullScreen] = useState(false);
-  const [isPostVisible, setPostVisible] = useState(false);
+  const [isPostVisible, setPostVisible] = useState(true); // Inicializar como true para evitar que desaparezca
 
   useEffect(() => {
     if (PostComponent) {
@@ -33,47 +33,42 @@ const Blog: React.FC = () => {
 
   const handlePostClick = () => {
     setSidebarVisible(false);
-    setTimeout(() => {
-      setFullScreen(true);
-      setPostVisible(true);
-    }, 300); // Duración de la animación de plegado del sidebar
+    setFullScreen(true);
   };
 
   const handleExitFullScreen = () => {
-    setPostVisible(false);
     setFullScreen(false);
-    setTimeout(() => {
-      setSidebarVisible(true);
-    }, 300); // Tiempo para que el sidebar regrese
+    setSidebarVisible(true); // Regresa el sidebar
   };
 
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
       {!isFullScreen && ( // Ocultar completamente el sidebar en pantalla completa
         <div
-          className={`overflow-hidden transition-transform duration-300 ease-in-out transform ${
-            isSidebarVisible ? 'translate-x-0 w-1/4' : '-translate-x-full w-1/4'
+          className={`overflow-hidden transition-all duration-500 ease-in-out transform ${
+            isSidebarVisible ? 'translate-x-0 w-1/4' : '-translate-x-full w-0'
           } relative`}>
           <Sidebar isDay={isDay} />
         </div>
+
       )}
-      <div className={`flex-1 ${isFullScreen ? 'p-8' : 'p-8'} ${isFullScreen ? 'w-full' : ''}`}>
+      <div className={`flex-1 ${isFullScreen ? 'p-8' : 'p-8'} ${!isSidebarVisible || isFullScreen ? 'w-full' : ''}`}>
         {PostComponent ? (
           <div
-            className={`relative transition-transform duration-800 transform ${
+            className={`relative transition-transform duration-900 transform ${
               isPostVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             } ${isFullScreen ? 'max-w-4xl mx-auto' : 'max-w-4xl mx-auto'}`}
             style={{ paddingTop: '2rem' }} // Asegura un margen superior constante
           >
             {!isFullScreen && (
-              <button onClick={handlePostClick} className="absolute top-4 right-4 text-blue-500">
+              <button onClick={handlePostClick} className={`absolute top-4 right-4 ${isDay ? 'text-secondary' : 'text-primary'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4h8m-8 8h8m-8 8h8M4 12h8M4 4l8 8M4 20l8-8" />
                 </svg>
               </button>
             )}
             {isFullScreen && (
-              <button onClick={handleExitFullScreen} className="absolute top-4 right-4 text-blue-500">
+              <button onClick={handleExitFullScreen} className={`absolute top-4 right-4 ${isDay ? 'text-secondary' : 'text-primary'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4h16v16H4V4z" />
                 </svg>

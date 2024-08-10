@@ -1,4 +1,6 @@
 --- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/tailwind.config.js ---
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}', 
@@ -11,20 +13,19 @@ module.exports = {
         secondary: '#2E2E2E', // Gris mate
         tertiary: '#DE58D2' // Rosado
       },
-      opacity: {
-        '10': '0.1',
-        '20': '0.2',
-        '30': '0.3',
-        '40': '0.4',
-        '50': '0.5',
-        '60': '0.6',
-        '70': '0.7',
-        '80': '0.8',
-        '90': '0.9',
-      }
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addBase, theme }) {
+      addBase({
+        ':root': {
+          '--color-primary': theme('colors.primary'),
+          '--color-secondary': theme('colors.secondary'),
+          '--color-tertiary': theme('colors.tertiary'),
+        },
+      });
+    }),
+  ],
 }
 
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/tailwind.config.js ---
@@ -126,18 +127,18 @@ code {
   left: 0;
   width: 0; /* Comienza con un ancho de 0 */
   height: 100%;
-  background-color: #DE58D2; /* Usamos el color terciario definido en Tailwind */
+  background-color: var(--color-tertiary); /* Usamos la variable CSS */
   transition: width 0.3s ease-in-out; /* Transición del ancho */
 }
 
 .sidebar-item:hover::before {
-  width: 5px; /* Expande a 4px cuando se hace hover */
+  width: 5px; /* Expande a 5px cuando se hace hover */
 }
 
 .sidebar-text {
   position: relative;
   display: inline-block;
-  background: linear-gradient(to left, currentColor 50%, #DE58D2 50%);
+  background: linear-gradient(to left, currentColor 50%, var(--color-tertiary) 50%);
   background-size: 200% 100%;
   background-position: 100%;
   transition: background-position 0.3s ease-in-out;
@@ -148,27 +149,21 @@ code {
 
 .sidebar-item:hover .sidebar-text {
   background-position: 0;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* NOTA: Eliminado el text-fill-color para evitar interferencias */
 }
-
-
-
-
 
 /* Selected item */
 .selected-sidebar-item {
-  border-left: 4px solid #DE58D2; /* Mantenemos el borde izquierdo en color terciario */
+  border-left: 4px solid var(--color-tertiary); /* Mantenemos el borde izquierdo en color terciario */
   background-color: rgba(222, 88, 210, 0.1); /* Un fondo ligeramente diferente para el post seleccionado */
 }
 
 .selected-sidebar-text {
-  background: linear-gradient(to left, #DE58D2 50%, currentColor 50%);
+  background: linear-gradient(to left, var(--color-tertiary) 50%, var(--color-tertiary) 50%);
   background-size: 200% 100%;
   background-position: 100%;
   transition: background-position 0.3s ease-in-out;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
 }
 
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.css ---
@@ -208,20 +203,24 @@ const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
       {posts.map(post => {
         const isSelected = post.name ? location.pathname.includes(post.name) : false; // Verificamos si la ruta actual incluye el nombre del post
         return (
-            <div 
-              key={post.name} 
-              className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-secondary' : 'bg-primary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:border-l-4 hover:border-tertiary group sidebar-item ${isSelected ? 'selected-sidebar-item' : ''}`}
+          <div 
+            key={post.name} 
+            className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-secondary' : 'bg-primary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:border-l-4 hover:border-tertiary group sidebar-item ${isSelected ? 'selected-sidebar-item' : ''}`}
+          >
+            <Link 
+              to={`/blog/${post.name}`} 
+              className={`flex-grow font-semibold truncate transition duration-300 ease-in-out
+                          ${isSelected ? (!isDay ? 'text-primary' : 'text-secondary') : (isDay ? 'text-primary' : 'text-secondary')}`}
             >
-              <Link 
-                to={`/blog/${post.name}`} 
-                className={`flex-grow font-semibold truncate transition duration-300 ease-in-out  ${isDay ? 'text-primary' : 'text-secondary'}  ${isSelected ? 'selected-sidebar-text' : ''}`}
-              >
-                <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out">
-                  {`#${post.id} - ${post.displayName}`}
-                </span>
-              </Link>
-              <span className={`text-sm ${isDay ? 'text-gray-500' : 'text-gray-400'} ml-2 fixed-width`}>{post.formattedDate}</span>
-            </div>
+              <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out sidebar-text">
+                {`#${post.id} - ${post.displayName}`}
+              </span>
+            </Link>
+            <span className={`text-sm ${isSelected ? (!isDay ? 'text-gray-400' : 'text-gray-700') : (isDay ? 'text-gray-400' : 'text-gray-700')} ml-2 fixed-width`}>
+              {post.formattedDate}
+            </span>
+
+          </div>
         );
       })}
     </div>
@@ -248,39 +247,34 @@ const componentsMap: { [key: string]: React.FC & { metadata?: { title: string, d
   return map;
 }, {} as { [key: string]: React.FC & { metadata?: { title: string, date: string } } });
 
-const Switch: React.FC<{ isOn: boolean, handleToggle: () => void }> = ({ isOn, handleToggle }) => {
-  return (
-    <div
-      className={`switch ${isOn ? 'switch-on' : 'switch-off'} absolute top-2 right-2`} // Posición absoluta para el switch en la parte superior derecha
-      onClick={handleToggle}
-    >
-      <div className="switch-handle" />
-    </div>
-  );
-};
-
 const Blog: React.FC = () => {
   const location = useLocation();
   const path = location.pathname.split("/").pop()?.toLowerCase();
-  const { isDay, toggleDayNight } = useContext(DayNightContext);
+  const { isDay } = useContext(DayNightContext);
 
   const PostComponent = path ? componentsMap[path] : null;
 
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
-      <div className="w-1/4 relative"> {/* Hacemos el contenedor relativo para posicionar el switch */}
-        <Switch isOn={isDay} handleToggle={toggleDayNight} /> {/* Incluimos el switch */}
+      <div className="w-1/4 relative">
         <Sidebar isDay={isDay} />
       </div>
       <div className="flex-1 p-8">
-        {PostComponent ? <PostComponent /> : <p>Selecciona un post del menú lateral.</p>}
+        {PostComponent ? (
+          <PostComponent />
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <p className={`text-3xl font-semibold text-center ${isDay ? 'text-secondary' : 'text-primary'}`}>
+              Selecciona un post para leer
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default Blog;
-
 
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/Blog.tsx ---
 

@@ -25,12 +25,12 @@ const Blog: React.FC = () => {
   const [isFullScreen, setFullScreen] = useState(false);
 
   const handlePostClick = () => {
-    setSidebarVisible(false);  // Oculta el sidebar al hacer clic en un post
+    setSidebarVisible(false); 
     setFullScreen(true);
   };
 
   const handleExitFullScreen = () => {
-    setFullScreen(false);  // Muestra el sidebar al salir de la vista de pantalla completa
+    setFullScreen(false); 
     setSidebarVisible(true);
   };
 
@@ -41,18 +41,17 @@ const Blog: React.FC = () => {
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: isSidebarVisible && !isFullScreen ? '0%' : '-100%' }} 
-        transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
-        className={`w-1/4 h-full fixed top-0 left-0 z-10`}
+        transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
+        className="w-1/4 h-full fixed top-0 left-0 z-10"
       >
         <Sidebar isDay={isDay} />
       </motion.div>
 
       {/* Main Content Area */}
       <motion.div
-        className={`flex-1 transition-all duration-500 ease-in-out ${isSidebarVisible ? 'ml-0 lg:ml-64' : 'ml-0'}`}
-        animate={{ paddingLeft: isSidebarVisible ? '16rem' : '0', width: isSidebarVisible ? 'calc(100% - 16rem)' : '100%' }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
-        style={{ paddingTop: '2rem' }}
+        className={`flex-1 transition-all duration-500 ease-in-out ${isSidebarVisible ? 'ml-0 lg:ml-64' : 'ml-0'} pt-16 pb-16`}
+        transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
+        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
       >
         {PostComponent ? (
           <div className="max-w-4xl mx-auto">

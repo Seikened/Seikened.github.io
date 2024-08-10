@@ -32,20 +32,24 @@ const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
       {posts.map(post => {
         const isSelected = post.name ? location.pathname.includes(post.name) : false; // Verificamos si la ruta actual incluye el nombre del post
         return (
-            <div 
-              key={post.name} 
-              className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-secondary' : 'bg-primary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:border-l-4 hover:border-tertiary group sidebar-item ${isSelected ? 'selected-sidebar-item' : ''}`}
+          <div 
+            key={post.name} 
+            className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-secondary' : 'bg-primary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:border-l-4 hover:border-tertiary group sidebar-item ${isSelected ? 'selected-sidebar-item' : ''}`}
+          >
+            <Link 
+              to={`/blog/${post.name}`} 
+              className={`flex-grow font-semibold truncate transition duration-300 ease-in-out
+                          ${isSelected ? (!isDay ? 'text-primary' : 'text-secondary') : (isDay ? 'text-primary' : 'text-secondary')}`}
             >
-              <Link 
-                to={`/blog/${post.name}`} 
-                className={`flex-grow font-semibold truncate transition duration-300 ease-in-out   ${isDay ? 'text-primary' : 'text-secondary'} ${isSelected ? 'selected-sidebar-text' : ''}`}
-              >
-                <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out sidebar-text">
-                  {`#${post.id} - ${post.displayName}`}
-                </span>
-              </Link>
-              <span className={`text-sm ${isDay ? 'text-gray-400' : 'text-gray-700'} ml-2 fixed-width`}>{post.formattedDate}</span>
-            </div>
+              <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out sidebar-text">
+                {`#${post.id} - ${post.displayName}`}
+              </span>
+            </Link>
+            <span className={`text-sm ${isSelected ? (!isDay ? 'text-gray-400' : 'text-gray-700') : (isDay ? 'text-gray-400' : 'text-gray-700')} ml-2 fixed-width`}>
+              {post.formattedDate}
+            </span>
+
+          </div>
         );
       })}
     </div>

@@ -22,43 +22,29 @@ const Blog: React.FC = () => {
 
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isFullScreen, setFullScreen] = useState(false);
-  const [isPostVisible, setPostVisible] = useState(true);
-
-  useEffect(() => {
-    if (PostComponent) {
-      setPostVisible(false);
-      setTimeout(() => setPostVisible(true), 100);
-    }
-  }, [PostComponent]);
 
   const handlePostClick = () => {
-    setSidebarVisible(false);
+    setSidebarVisible(false); // Oculta el sidebar al hacer clic en un post
     setFullScreen(true);
   };
 
   const handleExitFullScreen = () => {
-    setFullScreen(false);
+    setFullScreen(false); // Regresa el sidebar al salir de la vista de pantalla completa
     setSidebarVisible(true);
   };
 
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
-      <div
-        className={`overflow-hidden transition-transform duration-500 ease-in-out ${
-          isSidebarVisible ? 'w-1/4 translate-x-0' : 'w-0 -translate-x-full'
-        }`}
-        style={{ transitionProperty: 'width, transform' }}
-      >
-        {!isFullScreen && <Sidebar isDay={isDay} />}
+      
+      {/* Sidebar Container */}
+      <div className={isSidebarVisible ? 'block w-96' : 'hidden'}>
+        {!isFullScreen && <Sidebar isDay={isDay} />} {/* Renderiza el Sidebar solo si no está en pantalla completa */}
       </div>
-      <div className={`flex-1 transition-all duration-500 ${!isSidebarVisible || isFullScreen ? 'w-full' : ''}`}>
+
+      {/* Main Content Area */}
+      <div className={`flex-1 ${!isSidebarVisible || isFullScreen ? 'w-full' : ''}`}>
         {PostComponent ? (
-          <div
-            className={`relative transition-opacity duration-900 transform ${
-              isPostVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            } ${isFullScreen ? 'max-w-4xl mx-auto' : 'max-w-4xl mx-auto'}`}
-            style={{ paddingTop: '2rem' }}
-          >
+          <div style={{ paddingTop: '2rem' }}>
             {!isFullScreen && (
               <button onClick={handlePostClick} className={`absolute top-4 right-4 ${isDay ? 'text-secondary' : 'text-primary'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">

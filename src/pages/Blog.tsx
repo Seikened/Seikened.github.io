@@ -22,12 +22,12 @@ const Blog: React.FC = () => {
 
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isFullScreen, setFullScreen] = useState(false);
-  const [isPostVisible, setPostVisible] = useState(true); // Inicializar como true para evitar que desaparezca
+  const [isPostVisible, setPostVisible] = useState(true);
 
   useEffect(() => {
     if (PostComponent) {
-      setPostVisible(false); // Inicia con el post oculto
-      setTimeout(() => setPostVisible(true), 100); // Espera 100ms antes de mostrarlo
+      setPostVisible(false);
+      setTimeout(() => setPostVisible(true), 100);
     }
   }, [PostComponent]);
 
@@ -38,27 +38,26 @@ const Blog: React.FC = () => {
 
   const handleExitFullScreen = () => {
     setFullScreen(false);
-    setSidebarVisible(true); // Regresa el sidebar
+    setSidebarVisible(true);
   };
 
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
-      {!isFullScreen && ( // Ocultar completamente el sidebar en pantalla completa
-        <div
-          className={`overflow-hidden transition-all duration-500 ease-in-out transform ${
-            isSidebarVisible ? 'translate-x-0 w-1/4' : '-translate-x-full w-0'
-          } relative`}>
-          <Sidebar isDay={isDay} />
-        </div>
-
-      )}
-      <div className={`flex-1 ${isFullScreen ? 'p-8' : 'p-8'} ${!isSidebarVisible || isFullScreen ? 'w-full' : ''}`}>
+      <div
+        className={`overflow-hidden transition-transform duration-500 ease-in-out ${
+          isSidebarVisible ? 'w-1/4 translate-x-0' : 'w-0 -translate-x-full'
+        }`}
+        style={{ transitionProperty: 'width, transform' }}
+      >
+        {!isFullScreen && <Sidebar isDay={isDay} />}
+      </div>
+      <div className={`flex-1 transition-all duration-500 ${!isSidebarVisible || isFullScreen ? 'w-full' : ''}`}>
         {PostComponent ? (
           <div
-            className={`relative transition-transform duration-900 transform ${
+            className={`relative transition-opacity duration-900 transform ${
               isPostVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             } ${isFullScreen ? 'max-w-4xl mx-auto' : 'max-w-4xl mx-auto'}`}
-            style={{ paddingTop: '2rem' }} // Asegura un margen superior constante
+            style={{ paddingTop: '2rem' }}
           >
             {!isFullScreen && (
               <button onClick={handlePostClick} className={`absolute top-4 right-4 ${isDay ? 'text-secondary' : 'text-primary'}`}>
@@ -74,7 +73,7 @@ const Blog: React.FC = () => {
                 </svg>
               </button>
             )}
-            <div className="max-w-4xl mx-auto"> {/* Mantén el post centrado horizontalmente */}
+            <div className="max-w-4xl mx-auto">
               <PostComponent />
             </div>
           </div>

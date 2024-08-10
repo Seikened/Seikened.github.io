@@ -35,27 +35,10 @@ code {
     monospace;
 }
 
-
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.fade-out {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-}
-
-.fade-out::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 50px; /* Ajusta este valor según lo necesites */
-  background: linear-gradient(to left, #FEF3E2, rgba(255,255,255,0));
 }
 
 /* Clase para fijar el ancho de la fecha */
@@ -63,4 +46,43 @@ code {
   min-width: 5.9rem; /* Ajusta el valor según sea necesario */
   text-align: right;
   white-space: nowrap;
+}
+
+/* Efecto de transición del borde y del texto */
+.sidebar-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0; /* Comienza con un ancho de 0 */
+  height: 100%;
+  background-color: #DE58D2; /* Usamos el color terciario definido en Tailwind */
+  transition: width 0.3s ease-in-out; /* Transición del ancho */
+}
+
+.sidebar-item:hover::before {
+  width: 5px; /* Expande a 4px cuando se hace hover */
+}
+
+.sidebar-text {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to left, currentColor 50%, #DE58D2 50%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position 0.3s ease-in-out;
+  color: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar-item:hover .sidebar-text {
+  background-position: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

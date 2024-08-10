@@ -62,109 +62,6 @@ reportWebVitals();
 
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.tsx ---
 
---- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.tsx ---
-import React, { useContext } from 'react';
-import LandingPage from './pages/LandingPage';
-import { DayNightContext, DayNightProvider } from './components/DayNightContext';
-import './Switch.css'; // Importa el archivo CSS personalizado si es necesario
-
-const Switch: React.FC<{ isOn: boolean, handleToggle: () => void }> = ({ isOn, handleToggle }) => {
-  return (
-    <div
-      className={`switch ${isOn ? 'switch-on' : 'switch-off'} absolute top-2 left-2`} // Posición absoluta para el switch
-      onClick={handleToggle}
-    >
-      <div className="switch-handle" />
-    </div>
-  );
-};
-
-const AppContent: React.FC = () => {
-  const { isDay, toggleDayNight } = useContext(DayNightContext);
-
-  return (
-    <div className={`min-h-screen flex flex-col justify-center items-center ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
-      <Switch isOn={isDay} handleToggle={toggleDayNight} />
-      <h1 className="text-2xl font-semibold mb-4">
-        {isDay ? 'Buenos Días ☀️' : 'Buenas noches 🌙'}
-      </h1>
-      <LandingPage
-        nodeColor={isDay ? 'fill-secondary' : 'fill-primary'}
-        linkColor={isDay ? 'stroke-secondary' : 'stroke-primary'}
-        hoverColor="stroke-tertiary"
-        textColor = {isDay ? 'fill-secondary text-lg font-bold' : 'fill-primary text-lg font-bold'}
-        textOpacity={0.15}
-        isDay={isDay}
-      />
-    </div>
-  );
-};
-
-const App: React.FC = () => (
-  <DayNightProvider>
-    <AppContent />
-  </DayNightProvider>
-);
-
-export default App;
-
---- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.tsx ---
-
---- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.test.tsx ---
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
-
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
-
---- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.test.tsx ---
-
---- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.css ---
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
---- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/App.css ---
-
 --- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.css ---
 @tailwind base;
 @tailwind components;
@@ -203,27 +100,10 @@ code {
     monospace;
 }
 
-
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.fade-out {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-}
-
-.fade-out::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 50px; /* Ajusta este valor según lo necesites */
-  background: linear-gradient(to left, #FEF3E2, rgba(255,255,255,0));
 }
 
 /* Clase para fijar el ancho de la fecha */
@@ -233,32 +113,51 @@ code {
   white-space: nowrap;
 }
 
+/* Efecto de transición del borde y del texto */
+.sidebar-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0; /* Comienza con un ancho de 0 */
+  height: 100%;
+  background-color: #DE58D2; /* Usamos el color terciario definido en Tailwind */
+  transition: width 0.3s ease-in-out; /* Transición del ancho */
+}
+
+.sidebar-item:hover::before {
+  width: 5px; /* Expande a 4px cuando se hace hover */
+}
+
+.sidebar-text {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to left, currentColor 50%, #DE58D2 50%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position 0.3s ease-in-out;
+  color: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar-item:hover .sidebar-text {
+  background-position: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.css ---
-
---- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/posts/TestPost.tsx ---
-
-
-const TestPost = () => (
-  <div className="max-w-4xl mx-auto rounded-md p-4 border-l-4 border-secondary">
-    <h1 className="text-4xl font-bold mb-2 text-secondary">Test Post</h1>
-    <p className="text-sm text-gray-500">2024-08-06</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptas aspernatur minus accusantium, id saepe provident quasi. Excepturi aliquid ad recusandae minus libero officia vitae voluptate quos odit. Hic, laudantium?</p>
-  </div>
-);
-
-// Definimos los metadatos como propiedades estáticas del componente
-TestPost.metadata = {
-  title: "Pruebas de css",
-  date: "22-08-2024"
-};
-
-export default TestPost;
-
---- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/posts/TestPost.tsx ---
 
 --- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/components/Sidebar.tsx ---
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { format, parseISO } from 'date-fns';
 
 const postFiles = require.context('../posts', true, /\.tsx$/);
 
@@ -270,9 +169,17 @@ const posts = postFiles.keys().map(path => {
   return {
     name: path.match(/\/([^/]+)\.tsx$/)?.[1]?.toLowerCase(),
     displayName: metadata?.title || 'Sin título',
-    date: metadata?.date || 'Sin fecha'
+    date: metadata?.date || 'Sin fecha',
+    dateObj: parseISO(metadata?.date), // Convertimos la fecha en objeto Date
   };
-});
+})
+.sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime()) // Ordenamos por fecha ascendente para asignar IDs correctamente
+.map((post, index) => ({
+  ...post,
+  id: index + 1, // Asignamos un ID incremental basado en el orden ascendente
+  formattedDate: format(post.dateObj, 'dd-MM-yyyy'), // Formateamos la fecha para mostrarla como DD-MM-YYYY
+}))
+.sort((a, b) => b.dateObj.getTime() - a.dateObj.getTime()); // Ordenamos por fecha descendente para mostrar en el orden correcto
 
 const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
   return (
@@ -280,15 +187,17 @@ const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
       {posts.map(post => (
         <div 
           key={post.name} 
-          className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-primary' : 'bg-secondary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:border-l-4 hover:border-tertiary group`}
+          className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-primary' : 'bg-secondary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:border-l-4 hover:border-tertiary group sidebar-item`} // Añadimos la clase sidebar-item
         >
           <Link 
             to={`/blog/${post.name}`} 
-            className={`flex-grow font-semibold truncate ${isDay ? 'text-secondary' : 'text-primary'} group-hover:text-tertiary transition duration-300 ease-in-out`}
+            className={`flex-grow font-semibold truncate transition duration-300 ease-in-out sidebar-text ${isDay ? 'text-secondary' : 'text-primary'}`} // Añadimos la clase sidebar-text
           >
-            <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out">{post.displayName}</span>
+            <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out">
+              {`#${post.id} - ${post.displayName}`}
+            </span>
           </Link>
-          <span className={`text-sm ${isDay ? 'text-gray-500' : 'text-gray-400'} ml-2 fixed-width`}>{post.date}</span>
+          <span className={`text-sm ${isDay ? 'text-gray-500' : 'text-gray-400'} ml-2 fixed-width`}>{post.formattedDate}</span>
         </div>
       ))}
     </div>
@@ -298,57 +207,6 @@ const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
 export default Sidebar;
 
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/components/Sidebar.tsx ---
-
---- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/LandingPage.tsx ---
-import React from 'react';
-import PhysicsGraph from '../components/PhysicsGraph';
-
-interface LandingPageProps {
-  nodeColor: string;
-  linkColor: string;
-  hoverColor: string;
-  textColor: string;
-  textOpacity: number;
-  isDay: boolean;
-}
-
-// Componente de la página de inicio
-const LandingPage: React.FC<LandingPageProps> = ({ nodeColor, linkColor, hoverColor,textColor, textOpacity, isDay }) => {
-  const nodes = [
-    { id: 'center', label: 'Fernando Leon Franco', radius: 30 },
-    { id: 'Blog', label: 'Blog', url: '/blog', radius: 20 },
-    { id: 'Portfolio', label: 'Portfolio', url: '/portfolio', radius: 20 },
-    { id: 'About', label: 'About me', url: '/about', radius: 20 },
-  ];
-
-  const links = [
-    { source: 'center', target: 'Blog' },
-    { source: 'center', target: 'Portfolio' },
-    { source: 'center', target: 'About' },
-  ];
-
-  return (
-    <div className={`w-full h-full`}>
-      <div className="w-full h-full">
-        <PhysicsGraph
-          nodes={nodes}
-          links={links}
-          centralNodeId="center"
-          nodeColor={nodeColor}
-          linkColor={linkColor}
-          hoverColor={hoverColor}
-          textColor={textColor}
-          textOpacity={textOpacity}
-          isDay={isDay}
-        />
-      </div>
-    </div>
-  );
-};
-
-export default LandingPage;
-
---- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/LandingPage.tsx ---
 
 --- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/Blog.tsx ---
 import React, { useContext } from 'react';

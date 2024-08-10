@@ -30,11 +30,11 @@ const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
       {posts.map(post => (
         <div 
           key={post.name} 
-          className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-primary' : 'bg-secondary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:border-l-4 hover:border-tertiary group`}
+          className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-primary' : 'bg-secondary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:border-l-4 hover:border-tertiary group sidebar-item`} // Añadimos la clase sidebar-item
         >
           <Link 
             to={`/blog/${post.name}`} 
-            className={`flex-grow font-semibold truncate ${isDay ? 'text-secondary' : 'text-primary'} group-hover:text-tertiary transition duration-300 ease-in-out`}
+            className={`flex-grow font-semibold truncate transition duration-300 ease-in-out sidebar-text ${isDay ? 'text-secondary' : 'text-primary'}`} // Añadimos la clase sidebar-text
           >
             <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out">
               {`#${post.id} - ${post.displayName}`}

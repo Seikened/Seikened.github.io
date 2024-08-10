@@ -25,13 +25,11 @@ const Blog: React.FC = () => {
   const [isFullScreen, setFullScreen] = useState(false);
 
   const handlePostClick = () => {
-    console.log("Hiding sidebar and entering fullscreen");
     setSidebarVisible(false);
     setFullScreen(true);
   };
   
   const handleExitFullScreen = () => {
-    console.log("Exiting fullscreen and showing sidebar");
     setFullScreen(false);
     setSidebarVisible(true);
   };
@@ -42,9 +40,9 @@ const Blog: React.FC = () => {
       {/* Sidebar Container */}
       <motion.div
         initial={{ x: 0 }}
-        animate={{ x: isSidebarVisible && !isFullScreen ? 0 : -400 }} // Añadimos isFullScreen aquí
+        animate={{ x: isSidebarVisible && !isFullScreen ? '0%' : '-100%' }} // Añadimos isFullScreen aquí
         transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
-        className="w-96"
+        className="w-1/4" 
       >
         <Sidebar isDay={isDay} />
       </motion.div>

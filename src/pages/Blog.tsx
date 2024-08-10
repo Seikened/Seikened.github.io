@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import { DayNightContext } from '../components/DayNightContext';
+import { motion } from 'framer-motion';
 
 const postFiles = require.context('../posts', true, /\.tsx$/);
 
@@ -24,22 +25,30 @@ const Blog: React.FC = () => {
   const [isFullScreen, setFullScreen] = useState(false);
 
   const handlePostClick = () => {
-    setSidebarVisible(false); // Oculta el sidebar al hacer clic en un post
+    console.log("Hiding sidebar and entering fullscreen");
+    setSidebarVisible(false);
     setFullScreen(true);
   };
-
+  
   const handleExitFullScreen = () => {
-    setFullScreen(false); // Regresa el sidebar al salir de la vista de pantalla completa
+    console.log("Exiting fullscreen and showing sidebar");
+    setFullScreen(false);
     setSidebarVisible(true);
   };
-
+  
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
       
       {/* Sidebar Container */}
-      <div className={isSidebarVisible ? 'block w-96' : 'hidden'}>
-        {!isFullScreen && <Sidebar isDay={isDay} />} {/* Renderiza el Sidebar solo si no está en pantalla completa */}
-      </div>
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: isSidebarVisible && !isFullScreen ? 0 : -400 }} // Añadimos isFullScreen aquí
+        transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
+        className="w-96"
+      >
+        <Sidebar isDay={isDay} />
+      </motion.div>
+
 
       {/* Main Content Area */}
       <div className={`flex-1 ${!isSidebarVisible || isFullScreen ? 'w-full' : ''}`}>

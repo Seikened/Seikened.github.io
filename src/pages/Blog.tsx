@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/Sidebar'; // Mantén tu propio componente Sidebar
 import { DayNightContext } from '../components/DayNightContext';
 import { motion } from 'framer-motion';
 
@@ -23,35 +23,44 @@ const Blog: React.FC = () => {
 
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isFullScreen, setFullScreen] = useState(false);
+  const [sidebarRendered, setSidebarRendered] = useState(true); // Estado para controlar la renderización
 
   const handlePostClick = () => {
-    setSidebarVisible(false);
+    setSidebarVisible(false);  // Oculta el sidebar al hacer clic en un post
+    setTimeout(() => setSidebarRendered(false), 500); // Espera a que la animación termine antes de ocultarlo completamente
     setFullScreen(true);
   };
-  
+
   const handleExitFullScreen = () => {
-    setFullScreen(false);
-    setSidebarVisible(true);
+    setSidebarRendered(true);
+    setTimeout(() => setSidebarVisible(true), 50); // Espera antes de mostrar el sidebar con animación
+    setFullScreen(false); 
   };
-  
+
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
       
       {/* Sidebar Container */}
-      <motion.div
-        initial={{ x: 0 }}
-        animate={{ x: isSidebarVisible && !isFullScreen ? '0%' : '-100%' }} // Añadimos isFullScreen aquí
-        transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
-        className="w-1/4" 
-      >
-        <Sidebar isDay={isDay} />
-      </motion.div>
-
+      {sidebarRendered && (
+        <motion.div
+          initial={{ x: 0 }}
+          animate={{ x: isSidebarVisible && !isFullScreen ? '0%' : '-100%' }} 
+          transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
+          className="w-1/4"
+        >
+          <Sidebar isDay={isDay} />
+        </motion.div>
+      )}
 
       {/* Main Content Area */}
-      <div className={`flex-1 ${!isSidebarVisible || isFullScreen ? 'w-full' : ''}`}>
+      <motion.div
+        className={`transition-all duration-500 ease-in-out ${isSidebarVisible ? 'w-3/4' : 'w-full'}`}
+        animate={{ width: isSidebarVisible ? '75%' : '100%' }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.5 }}
+        style={{ paddingTop: '2rem' }}
+      >
         {PostComponent ? (
-          <div style={{ paddingTop: '2rem' }}>
+          <div className="max-w-4xl mx-auto">
             {!isFullScreen && (
               <button onClick={handlePostClick} className={`absolute top-4 right-4 ${isDay ? 'text-secondary' : 'text-primary'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,7 +75,7 @@ const Blog: React.FC = () => {
                 </svg>
               </button>
             )}
-            <div className="max-w-4xl mx-auto">
+            <div>
               <PostComponent />
             </div>
           </div>
@@ -77,7 +86,7 @@ const Blog: React.FC = () => {
             </p>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };

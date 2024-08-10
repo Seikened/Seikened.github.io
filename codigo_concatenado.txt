@@ -141,7 +141,7 @@ code {
   background-size: 200% 100%;
   background-position: 100%;
   transition: background-position 0.3s ease-in-out;
-  color: inherit;
+  color: currentColor;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -152,11 +152,30 @@ code {
   -webkit-text-fill-color: transparent;
 }
 
+
+
+
+
+/* Selected item */
+.selected-sidebar-item {
+  border-left: 4px solid #DE58D2; /* Mantenemos el borde izquierdo en color terciario */
+  background-color: rgba(222, 88, 210, 0.1); /* Un fondo ligeramente diferente para el post seleccionado */
+}
+
+.selected-sidebar-text {
+  background: linear-gradient(to left, #DE58D2 50%, currentColor 50%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position 0.3s ease-in-out;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/index.css ---
 
 --- Inicio del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/components/Sidebar.tsx ---
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 
 const postFiles = require.context('../posts', true, /\.tsx$/);
@@ -182,24 +201,29 @@ const posts = postFiles.keys().map(path => {
 .sort((a, b) => b.dateObj.getTime() - a.dateObj.getTime()); // Ordenamos por fecha descendente para mostrar en el orden correcto
 
 const Sidebar: React.FC<{ isDay: boolean }> = ({ isDay }) => {
+  const location = useLocation(); // Usamos useLocation para obtener la ruta actual
+
   return (
-    <div className={`p-4 ${isDay ? 'bg-secondary' : 'bg-primary'} h-full border-r-2`}>
-      {posts.map(post => (
-        <div 
-          key={post.name} 
-          className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-primary' : 'bg-secondary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:border-l-4 hover:border-tertiary group sidebar-item`} // Añadimos la clase sidebar-item
-        >
-          <Link 
-            to={`/blog/${post.name}`} 
-            className={`flex-grow font-semibold truncate transition duration-300 ease-in-out sidebar-text ${isDay ? 'text-secondary' : 'text-primary'}`} // Añadimos la clase sidebar-text
-          >
-            <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out">
-              {`#${post.id} - ${post.displayName}`}
-            </span>
-          </Link>
-          <span className={`text-sm ${isDay ? 'text-gray-500' : 'text-gray-400'} ml-2 fixed-width`}>{post.formattedDate}</span>
-        </div>
-      ))}
+    <div className={`p-4 ${isDay ? 'bg-primary border-secondary' : 'bg-secondary border-primary'} h-full border-r-2`}>
+      {posts.map(post => {
+        const isSelected = post.name ? location.pathname.includes(post.name) : false; // Verificamos si la ruta actual incluye el nombre del post
+        return (
+            <div 
+              key={post.name} 
+              className={`flex justify-between items-center mb-2 p-2 ${isDay ? 'bg-secondary' : 'bg-primary'} rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:border-l-4 hover:border-tertiary group sidebar-item ${isSelected ? 'selected-sidebar-item' : ''}`}
+            >
+              <Link 
+                to={`/blog/${post.name}`} 
+                className={`flex-grow font-semibold truncate transition duration-300 ease-in-out  ${isDay ? 'text-primary' : 'text-secondary'}  ${isSelected ? 'selected-sidebar-text' : ''}`}
+              >
+                <span className="block w-full overflow-hidden whitespace-nowrap overflow-ellipsis fade-out">
+                  {`#${post.id} - ${post.displayName}`}
+                </span>
+              </Link>
+              <span className={`text-sm ${isDay ? 'text-gray-500' : 'text-gray-400'} ml-2 fixed-width`}>{post.formattedDate}</span>
+            </div>
+        );
+      })}
     </div>
   );
 };
@@ -224,16 +248,28 @@ const componentsMap: { [key: string]: React.FC & { metadata?: { title: string, d
   return map;
 }, {} as { [key: string]: React.FC & { metadata?: { title: string, date: string } } });
 
+const Switch: React.FC<{ isOn: boolean, handleToggle: () => void }> = ({ isOn, handleToggle }) => {
+  return (
+    <div
+      className={`switch ${isOn ? 'switch-on' : 'switch-off'} absolute top-2 right-2`} // Posición absoluta para el switch en la parte superior derecha
+      onClick={handleToggle}
+    >
+      <div className="switch-handle" />
+    </div>
+  );
+};
+
 const Blog: React.FC = () => {
   const location = useLocation();
   const path = location.pathname.split("/").pop()?.toLowerCase();
-  const { isDay } = useContext(DayNightContext);
+  const { isDay, toggleDayNight } = useContext(DayNightContext);
 
   const PostComponent = path ? componentsMap[path] : null;
 
   return (
     <div className={`flex min-h-screen ${isDay ? 'bg-primary' : 'bg-secondary'}`}>
-      <div className="w-1/4">
+      <div className="w-1/4 relative"> {/* Hacemos el contenedor relativo para posicionar el switch */}
+        <Switch isOn={isDay} handleToggle={toggleDayNight} /> {/* Incluimos el switch */}
         <Sidebar isDay={isDay} />
       </div>
       <div className="flex-1 p-8">
@@ -244,6 +280,7 @@ const Blog: React.FC = () => {
 };
 
 export default Blog;
+
 
 --- Fin del archivo: /Users/fernandoleonfranco/Documents/GitHub/Seikened.github.io/src/pages/Blog.tsx ---
 

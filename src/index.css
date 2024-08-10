@@ -61,28 +61,42 @@ code {
   left: 0;
   width: 0; /* Comienza con un ancho de 0 */
   height: 100%;
-  background-color: #DE58D2; /* Usamos el color terciario definido en Tailwind */
+  background-color: var(--color-tertiary); /* Usamos la variable CSS */
   transition: width 0.3s ease-in-out; /* Transición del ancho */
 }
 
 .sidebar-item:hover::before {
-  width: 5px; /* Expande a 4px cuando se hace hover */
+  width: 5px; /* Expande a 5px cuando se hace hover */
 }
 
 .sidebar-text {
   position: relative;
   display: inline-block;
-  background: linear-gradient(to left, currentColor 50%, #DE58D2 50%);
+  background: linear-gradient(to left, currentColor 50%, var(--color-tertiary) 50%);
   background-size: 200% 100%;
   background-position: 100%;
   transition: background-position 0.3s ease-in-out;
-  color: inherit;
+  color: currentColor;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .sidebar-item:hover .sidebar-text {
   background-position: 0;
+  /* NOTA: Eliminado el text-fill-color para evitar interferencias */
+}
+
+/* Selected item */
+.selected-sidebar-item {
+  border-left: 4px solid var(--color-tertiary); /* Mantenemos el borde izquierdo en color terciario */
+  background-color: rgba(222, 88, 210, 0.1); /* Un fondo ligeramente diferente para el post seleccionado */
+}
+
+.selected-sidebar-text {
+  
+  background: linear-gradient(to left, var(--color-tertiary) 50%, var(--color-tertiary) 50%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position 0.3s ease-in-out;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
